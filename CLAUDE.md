@@ -93,7 +93,7 @@ This project follows a **Sacred Process** that MUST be followed without deviatio
 9. **STEP 9: Create PR** - Developer creates a Pull Request
 10. **STEP 10: Await Copilot Review** - Wait for GitHub Copilot review (up to 30 minutes max)
 11. **STEP 11: Analyze Copilot Feedback** - Lead analyzes any Copilot comments
-12. **STEP 12: Copilot Fixes** - Developer addresses Copilot feedback, push changes, return to STEP 3
+12. **STEP 12: Copilot Fixes** - Developer addresses Copilot feedback, pushes changes, returns to STEP 3
 13. **STEP 13: Merge PR** - Only after Copilot review passes or timeout
 14. **STEP 14: Completion** - Issue is closed, move to next issue
 
@@ -104,7 +104,7 @@ This project follows a **Sacred Process** that MUST be followed without deviatio
 - Poll `gh pr view <PR_NUMBER> --json reviews,comments` every 2 minutes
 - Check `gh pr checks <PR_NUMBER>` for any CI/CD status
 - When Copilot review arrives: proceed to STEP 11 (analyze), then STEP 12 (fix if needed)
-- If fixes are pushed in STEP 12: return to STEP 3 (Code Review) to restart the cycle
+- If you push fixes in STEP 12: return to STEP 3 (Code Review) to restart the cycle
 - If no review after 30 minutes: proceed to merge
 - Maximum wait time: 30 minutes per review cycle
 
@@ -116,7 +116,7 @@ This project follows a **Sacred Process** that MUST be followed without deviatio
 #### Rule 3: Review Loops
 - If Code Review (STEP 3) finds issues: fix them and return to STEP 3
 - If QA Testing (STEP 6) finds issues: fix them and return to STEP 3
-- If Copilot Review (STEP 11) finds issues: fix in STEP 12, push changes, return to STEP 3 (restart cycle)
+- If Copilot Review (STEP 11) finds issues: fix them in STEP 12, push changes, and return to STEP 3 (restart cycle)
 - Never proceed to the next major phase until the current phase passes
 
 #### Rule 4: Code Change Restart Rule
@@ -162,7 +162,7 @@ When at STEP 10, wait for Copilot review (max 30 minutes):
 - Record PR creation timestamp
 - Poll every 2 minutes for reviews/comments
 - When Copilot review arrives: proceed to STEP 11 (analyze), then STEP 12 (fix if needed)
-- If fixes pushed: return to STEP 3 (Code Review) to restart the cycle
+- If you push fixes: return to STEP 3 (Code Review) to restart the cycle
 - If no review after 30 minutes: proceed to merge
 - Never wait longer than 30 minutes per cycle
 
