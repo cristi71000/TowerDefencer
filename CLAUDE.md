@@ -80,9 +80,9 @@ This project follows a **Sacred Process** that MUST be followed without deviatio
 ### The Sacred Process Steps
 
 > **Note**: STEPS 3 and 6 are internal reviews performed by AI agents (Code Reviewer, QA Tester)
-> before the PR is created. STEPS 10-12 are GitHub PR-based reviews by Copilot after PR creation.
+> before the PR is created. STEPS 4-5, 7-8 are analysis and fix steps. STEPS 10-12 are GitHub PR-based reviews by Copilot after PR creation.
 
-1. **STEP 1: Issue Selection** - Lead selects the next issue to work on based on the issue number in the TITLE
+1. **STEP 1: Issue Selection** - Lead selects the next issue to work on based on the issue number from the GitHub issue title
 2. **STEP 2: Development** - Developer implements the issue on a feature branch
 3. **STEP 3: Code Review (Internal)** - AI Reviewer reviews the implementation locally
 4. **STEP 4: Lead Analyzes Review** - Lead determines if fixes are needed
@@ -93,7 +93,7 @@ This project follows a **Sacred Process** that MUST be followed without deviatio
 9. **STEP 9: Create PR** - Developer creates a Pull Request
 10. **STEP 10: Await Copilot Review** - Wait for GitHub Copilot review (up to 30 minutes max)
 11. **STEP 11: Analyze Copilot Feedback** - Lead analyzes any Copilot comments
-12. **STEP 12: Copilot Fixes** - Developer addresses Copilot feedback, pushes changes, returns to STEP 3
+12. **STEP 12: Copilot Fixes** - Developer addresses Copilot feedback, pushes changes, and returns to STEP 3
 13. **STEP 13: Merge PR** - Only after Copilot review passes or timeout
 14. **STEP 14: Completion** - Issue is closed, move to next issue
 
@@ -106,32 +106,27 @@ This project follows a **Sacred Process** that MUST be followed without deviatio
 - When Copilot review arrives: proceed to STEP 11 (analyze), then STEP 12 (fix if needed)
 - If you push fixes in STEP 12: return to STEP 3 (Code Review) to restart the cycle
 - If no review after 30 minutes: proceed to merge
-- Maximum wait time: 30 minutes each time you reach STEP 10
+- Maximum wait time: 30 minutes each time you reach STEP 10 (per attempt at Copilot review)
 
 #### Rule 2: Never Skip Steps
 - Every step in the Sacred Process must be executed in order
 - No step may be skipped, even if it seems unnecessary
 - Document the result of each step before proceeding
 
-#### Rule 3: Review Loops
+#### Rule 3: Review Loops and Iteration Limits
 - If Code Review (STEP 3) finds issues: fix them and return to STEP 3
 - If QA Testing (STEP 6) finds issues: fix them and return to STEP 3
 - If Copilot Review (STEP 11) finds issues: fix them in STEP 12, push changes, and return to STEP 3 (restart cycle)
 - Never proceed to the next major phase until the current phase passes
-
-#### Rule 4: Code Change Restart Rule
-**CRITICAL**: If ANY code change is made due to review feedback at ANY point in the process:
-- Return to STEP 3 (Code Review) and restart the review cycle
-- This applies to fixes from Code Review, QA Testing, OR Copilot Review
-- Maximum 3 iterations of this restart loop
+- **Maximum 3 iterations** of the STEP 3 restart loop
 - After 3 iterations, escalate to user for decision
 
-#### Rule 5: Branch Discipline
+#### Rule 4: Branch Discipline
 - Always work on feature branches: `feature/issue-<number>-<short-description>`
 - Never commit directly to main
 - All changes go through PRs
 
-#### Rule 6: Issue Tracking
+#### Rule 5: Issue Tracking
 - All work must be tied to a GitHub issue
 - PRs must reference the issue with "Closes #X"
 - Issues are only closed when the PR is merged
@@ -164,7 +159,7 @@ When at STEP 10, wait for Copilot review (max 30 minutes):
 - When Copilot review arrives: proceed to STEP 11 (analyze), then STEP 12 (fix if needed)
 - If you push fixes: return to STEP 3 (Code Review) to restart the cycle
 - If no review after 30 minutes: proceed to merge
-- Never wait longer than 30 minutes for any single STEP 10 attempt
+- Never wait longer than 30 minutes for any single STEP 10 attempt (each Copilot review wait)
 
 ---
 
