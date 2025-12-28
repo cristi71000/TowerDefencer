@@ -1,0 +1,198 @@
+# CLAUDE.md - Project Rules and Guidelines
+
+## Project Overview
+
+**TowerDefencer** is a 3D isometric tower defense game built with Unity 6 (6000.0.42f1).
+
+### Technology Stack
+- **Engine**: Unity 6000.0.42f1 with 3D URP (Universal Render Pipeline)
+- **Language**: C# (.NET Standard 2.1)
+- **Input**: Unity Input System 1.13.1
+- **UI**: TextMeshPro 3.2.0, UI Toolkit
+- **Navigation**: AI Navigation 2.0.6 (NavMesh for enemy pathfinding)
+- **Camera**: Cinemachine 3.1.3
+- **Level Design**: ProBuilder 6.0.4
+
+### Project Structure
+```
+Assets/_Project/
+├── Art/           # Models, Materials, Textures, Animations
+├── Audio/         # Music, SFX
+├── Prefabs/       # Towers, Enemies, Projectiles, UI, VFX
+├── Scenes/        # Boot, MainMenu, Levels, Test
+├── ScriptableObjects/  # Data (Enemies, Towers, Waves, Levels, Upgrades), Events, Variables
+├── Scripts/
+│   ├── Runtime/   # Game code (Towers, Enemies, Waves, Economy, Grid, etc.)
+│   ├── Editor/    # Editor tools
+│   └── Tests/     # EditMode and PlayMode tests
+├── Settings/      # Input, Physics, Rendering configurations
+└── UI/            # Sprites, UI Toolkit documents and styles
+```
+
+### Assembly Definitions
+- `TowerDefense.Runtime` - Main game code
+- `TowerDefense.Editor` - Editor-only tools (Editor platform only)
+- `TowerDefense.Tests.EditMode` - Edit mode tests (NUnit)
+- `TowerDefense.Tests.PlayMode` - Play mode tests (NUnit)
+
+### Physics Layers
+| Layer | Name | Purpose |
+|-------|------|---------|
+| 6 | Ground | Terrain/grid for placement |
+| 7 | Tower | Tower colliders |
+| 8 | Enemy | Enemy targeting |
+| 9 | Projectile | Projectile collisions |
+| 10 | Obstacle | Path blocking |
+| 11 | Buildable | Valid tower placement areas |
+| 12 | Path | Enemy pathing |
+| 13 | Selectable | Click detection |
+
+### Input Actions
+- **Gameplay**: Select (LMB), Cancel (RMB/Esc), CameraMove (WASD), CameraZoom (Scroll), Pause (Esc)
+- **UI**: Navigate (Arrows), Submit (Enter), Cancel (Esc)
+
+---
+
+## Development Setup
+
+### Prerequisites
+1. Unity Hub with Unity 6000.0.42f1 installed
+2. Git
+3. GitHub CLI (`gh`) authenticated
+
+### Opening the Project
+1. Clone the repository
+2. Open Unity Hub
+3. Add project from disk: select the TowerDefencer folder
+4. Open with Unity 6000.0.42f1
+
+### Running Tests
+- Open Unity Test Runner: Window > General > Test Runner
+- Run EditMode tests for unit tests
+- Run PlayMode tests for integration tests
+
+---
+
+## CRITICAL: Sacred Process Development Workflow
+
+This project follows a **Sacred Process** that MUST be followed without deviation.
+
+### The Sacred Process Steps
+
+1. **STEP 1: Issue Selection** - Lead selects the next issue to work on
+2. **STEP 2: Development** - Developer implements the issue on a feature branch
+3. **STEP 3: Code Review** - Reviewer reviews the implementation
+4. **STEP 4: Lead Analyzes Review** - Lead determines if fixes are needed
+5. **STEP 5: Review Fixes** - Developer fixes any issues found (loop back to STEP 3 if needed)
+6. **STEP 6: QA Testing** - Tester validates the implementation
+7. **STEP 7: Lead Analyzes QA** - Lead determines if fixes are needed
+8. **STEP 8: QA Fixes** - Developer fixes any issues found (loop back to STEP 6 if needed)
+9. **STEP 9: Create PR** - Developer creates a Pull Request
+10. **STEP 10: Await Copilot Review** - **MANDATORY 30 MINUTE WAIT** for GitHub Copilot review
+11. **STEP 11: Analyze Copilot Feedback** - Lead analyzes any Copilot comments
+12. **STEP 12: Copilot Fixes** - Developer addresses Copilot feedback (loop back to STEP 10 if needed)
+13. **STEP 13: Merge PR** - Only after Copilot review period has elapsed
+14. **STEP 14: Completion** - Issue is closed, move to next issue
+
+### MANDATORY RULES
+
+#### Rule 1: Copilot Review Wait Time
+**WAIT UP TO 30 MINUTES** for GitHub Copilot review after creating a PR.
+- Poll `gh pr view <PR_NUMBER> --json reviews,comments` every 2 minutes
+- Check `gh pr checks <PR_NUMBER>` for any CI/CD status
+- **When Copilot review arrives: CONTINUE THE SACRED PROCESS** (STEP 11 onwards)
+- If no review after 30 minutes: proceed to merge
+- Maximum wait time: 30 minutes
+
+#### Rule 2: Never Skip Steps
+- Every step in the Sacred Process must be executed in order
+- No step may be skipped, even if it seems unnecessary
+- Document the result of each step before proceeding
+
+#### Rule 3: Review Loops
+- If Code Review (STEP 3) finds issues, fix them and return to STEP 3
+- If QA Testing (STEP 6) finds issues, fix them and return to STEP 6
+- If Copilot Review (STEP 10) finds issues, fix them and return to STEP 10
+- Never proceed to the next major phase until the current phase passes
+
+#### Rule 4: Branch Discipline
+- Always work on feature branches: `feature/issue-<number>-<short-description>`
+- Never commit directly to main
+- All changes go through PRs
+
+#### Rule 5: Issue Tracking
+- All work must be tied to a GitHub issue
+- PRs must reference the issue with "Closes #X"
+- Issues are only closed when the PR is merged
+
+### Violation Consequences
+
+Violating these rules undermines the quality assurance process and will result in:
+1. Immediate halt of current work
+2. Reversion of improper changes
+3. Restart of the process from the violated step
+
+### Polling Command Reference
+
+```bash
+# Check for reviews and comments
+gh pr view <PR_NUMBER> --json reviews,comments
+
+# Check CI/CD status
+gh pr checks <PR_NUMBER>
+
+# Check merge status
+gh pr view <PR_NUMBER> --json state,mergeable,mergeStateStatus
+```
+
+### Time Tracking for STEP 10
+
+When at STEP 10, wait for Copilot review (max 30 minutes):
+- Record PR creation timestamp
+- Poll every 2 minutes for reviews/comments
+- When Copilot review arrives: CONTINUE THE SACRED PROCESS (STEP 11+)
+- If no review after 30 minutes: proceed to merge
+- Never wait longer than 30 minutes
+
+---
+
+## Code Style Guidelines
+
+### C# Conventions
+- Use PascalCase for public members, camelCase for private
+- Prefix private fields with underscore: `_privateField`
+- Use explicit access modifiers
+- One class per file, file name matches class name
+
+### Unity Conventions
+- Use `[SerializeField]` for inspector-exposed private fields
+- Prefer ScriptableObjects for game data
+- Use events for decoupled communication
+- Cache component references in Awake()
+
+### Git Conventions
+- Commit messages follow conventional commits: `feat:`, `fix:`, `docs:`, `refactor:`, etc.
+- PRs must have descriptive titles and summaries
+- Squash merge to keep history clean
+
+---
+
+## GitHub Issues
+
+All development work is tracked via GitHub issues. There are 108 issues organized into 15 milestones:
+
+- M1: Project Setup & Core Systems
+- M2: Grid & Building System
+- M3: Tower System Foundation
+- M4: Enemy System Foundation
+- M5: Wave Management
+- M6: Combat System
+- M7: Economy & Resources
+- M8: Camera & Controls
+- M9: UI Foundation
+- M10: Game Flow & Scenes
+- M11: Audio System
+- M12: Level Design Tools
+- M13: Balance & Polish
+- M14: Content Creation
+- M15: Mobile & Optimization
