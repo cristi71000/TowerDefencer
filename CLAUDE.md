@@ -79,7 +79,7 @@ This project follows a **Sacred Process** that MUST be followed without deviatio
 
 ### The Sacred Process Steps
 
-> **Note**: STEPS 3-8 are internal reviews performed by AI agents (Code Reviewer, QA Tester)
+> **Note**: STEPS 3 and 6 are internal reviews performed by AI agents (Code Reviewer, QA Tester)
 > before the PR is created. STEPS 10-12 are GitHub PR-based reviews by Copilot after PR creation.
 
 1. **STEP 1: Issue Selection** - Lead selects the next issue to work on based on the issue number in the TITLE
@@ -106,7 +106,7 @@ This project follows a **Sacred Process** that MUST be followed without deviatio
 - When Copilot review arrives: proceed to STEP 11 (analyze), then STEP 12 (fix if needed)
 - If you push fixes in STEP 12: return to STEP 3 (Code Review) to restart the cycle
 - If no review after 30 minutes: proceed to merge
-- Maximum wait time: 30 minutes per review cycle
+- Maximum wait time: 30 minutes each time you reach STEP 10
 
 #### Rule 2: Never Skip Steps
 - Every step in the Sacred Process must be executed in order
@@ -164,7 +164,7 @@ When at STEP 10, wait for Copilot review (max 30 minutes):
 - When Copilot review arrives: proceed to STEP 11 (analyze), then STEP 12 (fix if needed)
 - If you push fixes: return to STEP 3 (Code Review) to restart the cycle
 - If no review after 30 minutes: proceed to merge
-- Never wait longer than 30 minutes per cycle
+- Never wait longer than 30 minutes for any single STEP 10 attempt
 
 ---
 
