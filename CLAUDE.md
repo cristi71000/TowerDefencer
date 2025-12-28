@@ -79,19 +79,22 @@ This project follows a **Sacred Process** that MUST be followed without deviatio
 
 ### The Sacred Process Steps
 
-1. **STEP 1: Issue Selection** - Lead selects the next issue to work on
+> **Note**: STEPS 3 and 6 are internal reviews performed by AI agents (Code Reviewer, QA Tester)
+> before the PR is created. STEPS 10-12 are GitHub PR-based reviews by Copilot after PR creation.
+
+1. **STEP 1: Issue Selection** - Lead selects the next issue to work on based on the issue number in the TITLE
 2. **STEP 2: Development** - Developer implements the issue on a feature branch
-3. **STEP 3: Code Review** - Reviewer reviews the implementation
+3. **STEP 3: Code Review (Internal)** - AI Reviewer reviews the implementation locally
 4. **STEP 4: Lead Analyzes Review** - Lead determines if fixes are needed
-5. **STEP 5: Review Fixes** - Developer fixes any issues found (loop back to STEP 3 if needed)
-6. **STEP 6: QA Testing** - Tester validates the implementation
+5. **STEP 5: Review Fixes** - Developer fixes any issues found (loop back to STEP 3)
+6. **STEP 6: QA Testing (Internal)** - AI Tester validates the implementation locally
 7. **STEP 7: Lead Analyzes QA** - Lead determines if fixes are needed
-8. **STEP 8: QA Fixes** - Developer fixes any issues found (loop back to STEP 6 if needed)
+8. **STEP 8: QA Fixes** - Developer fixes any issues found (loop back to STEP 3)
 9. **STEP 9: Create PR** - Developer creates a Pull Request
-10. **STEP 10: Await Copilot Review** - **MANDATORY 30 MINUTE WAIT** for GitHub Copilot review
+10. **STEP 10: Await Copilot Review** - Wait for GitHub Copilot review (up to 30 minutes max)
 11. **STEP 11: Analyze Copilot Feedback** - Lead analyzes any Copilot comments
-12. **STEP 12: Copilot Fixes** - Developer addresses Copilot feedback (loop back to STEP 10 if needed)
-13. **STEP 13: Merge PR** - Only after Copilot review period has elapsed
+12. **STEP 12: Copilot Fixes** - Developer addresses Copilot feedback, pushes changes, returns to STEP 3
+13. **STEP 13: Merge PR** - Only after Copilot review passes or timeout
 14. **STEP 14: Completion** - Issue is closed, move to next issue
 
 ### MANDATORY RULES
@@ -100,9 +103,10 @@ This project follows a **Sacred Process** that MUST be followed without deviatio
 **WAIT UP TO 30 MINUTES** for GitHub Copilot review after creating a PR.
 - Poll `gh pr view <PR_NUMBER> --json reviews,comments` every 2 minutes
 - Check `gh pr checks <PR_NUMBER>` for any CI/CD status
-- **When Copilot review arrives: CONTINUE THE SACRED PROCESS** (STEP 11 onwards)
+- When Copilot review arrives: proceed to STEP 11 (analyze), then STEP 12 (fix if needed)
+- If you push fixes in STEP 12: return to STEP 3 (Code Review) to restart the cycle
 - If no review after 30 minutes: proceed to merge
-- Maximum wait time: 30 minutes
+- Maximum wait time: 30 minutes each time you reach STEP 10
 
 #### Rule 2: Never Skip Steps
 - Every step in the Sacred Process must be executed in order
@@ -110,17 +114,24 @@ This project follows a **Sacred Process** that MUST be followed without deviatio
 - Document the result of each step before proceeding
 
 #### Rule 3: Review Loops
-- If Code Review (STEP 3) finds issues, fix them and return to STEP 3
-- If QA Testing (STEP 6) finds issues, fix them and return to STEP 6
-- If Copilot Review (STEP 10) finds issues, fix them and return to STEP 10
+- If Code Review (STEP 3) finds issues: fix them and return to STEP 3
+- If QA Testing (STEP 6) finds issues: fix them and return to STEP 3
+- If Copilot Review (STEP 11) finds issues: fix them in STEP 12, push changes, and return to STEP 3 (restart cycle)
 - Never proceed to the next major phase until the current phase passes
 
-#### Rule 4: Branch Discipline
+#### Rule 4: Code Change Restart Rule
+**CRITICAL**: If ANY code change is made due to review feedback at ANY point in the process:
+- Return to STEP 3 (Code Review) and restart the review cycle
+- This applies to fixes from Code Review, QA Testing, OR Copilot Review
+- Maximum 3 iterations of this restart loop
+- After 3 iterations, escalate to user for decision
+
+#### Rule 5: Branch Discipline
 - Always work on feature branches: `feature/issue-<number>-<short-description>`
 - Never commit directly to main
 - All changes go through PRs
 
-#### Rule 5: Issue Tracking
+#### Rule 6: Issue Tracking
 - All work must be tied to a GitHub issue
 - PRs must reference the issue with "Closes #X"
 - Issues are only closed when the PR is merged
@@ -150,9 +161,10 @@ gh pr view <PR_NUMBER> --json state,mergeable,mergeStateStatus
 When at STEP 10, wait for Copilot review (max 30 minutes):
 - Record PR creation timestamp
 - Poll every 2 minutes for reviews/comments
-- When Copilot review arrives: CONTINUE THE SACRED PROCESS (STEP 11+)
+- When Copilot review arrives: proceed to STEP 11 (analyze), then STEP 12 (fix if needed)
+- If you push fixes: return to STEP 3 (Code Review) to restart the cycle
 - If no review after 30 minutes: proceed to merge
-- Never wait longer than 30 minutes
+- Never wait longer than 30 minutes for any single STEP 10 attempt
 
 ---
 
