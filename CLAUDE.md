@@ -123,8 +123,9 @@ This project follows a **Sacred Process** that MUST be followed without deviatio
 **CRITICAL**: If ANY code change is made due to review feedback at ANY point in the process:
 - Return to STEP 3 (Code Review) and restart the review cycle
 - This applies to fixes from Code Review, QA Testing, OR Copilot Review
-- Maximum 3 iterations of this restart loop
-- After 3 iterations, escalate to user for decision
+- **Internal loops (STEP 3-8) can iterate unlimited times** until issues are resolved
+- **Maximum 3 iterations of the FULL cycle** (reaching Copilot review at STEP 10)
+- After 3 full cycles through Copilot review, escalate to user for decision
 
 #### Rule 5: Branch Discipline
 - Always work on feature branches: `feature/issue-<number>-<short-description>`
