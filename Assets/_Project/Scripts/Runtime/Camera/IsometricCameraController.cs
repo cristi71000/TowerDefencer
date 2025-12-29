@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Unity.Cinemachine;
 using TowerDefense.Core;
+using TowerDefense;
 
 namespace TowerDefense.Camera
 {
@@ -48,6 +49,12 @@ namespace TowerDefense.Camera
             else
             {
                 _targetZoom = 10f;
+                Debug.LogWarning("[CameraController] No virtual camera assigned!");
+            }
+
+            if (_cameraTarget == null)
+            {
+                Debug.LogWarning("[CameraController] No camera target assigned!");
             }
         }
 
