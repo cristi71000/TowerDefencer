@@ -76,7 +76,14 @@ namespace TowerDefense.Camera
 
         private void OnPan(InputAction.CallbackContext context)
         {
-            _panInput = context.ReadValue<Vector2>();
+            if (context.canceled)
+            {
+                _panInput = Vector2.zero;
+            }
+            else
+            {
+                _panInput = context.ReadValue<Vector2>();
+            }
         }
 
         private void OnZoom(InputAction.CallbackContext context)
@@ -167,6 +174,7 @@ namespace TowerDefense.Camera
                 float normalizedZoom = Mathf.Sign(_zoomInput);
                 _targetZoom -= normalizedZoom * _zoomSpeed;
                 _targetZoom = Mathf.Clamp(_targetZoom, _minZoom, _maxZoom);
+                _zoomInput = 0f;
             }
 
             float currentZoom = _virtualCamera.Lens.OrthographicSize;
