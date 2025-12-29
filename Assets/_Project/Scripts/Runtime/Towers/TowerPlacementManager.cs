@@ -173,6 +173,7 @@ namespace TowerDefense.Towers
         {
             if (_previewInstance == null) return;
             if (_gridManager == null) return;
+            if (Mouse.current == null) return;
 
             Vector2 mousePosition = Mouse.current.position.ReadValue();
             Ray ray = _mainCamera.ScreenPointToRay(mousePosition);
@@ -305,14 +306,38 @@ namespace TowerDefense.Towers
             if (tower == null) return;
 
             Vector2Int gridPos = tower.GridPosition;
-            int sellValue = tower.Data.SellValue;
+
+            // Get sell value with null check
+            int sellValue = 0;
+            if (tower.Data != null)
+            {
+                sellValue = tower.Data.SellValue;
+            }
+            else
+            {
+                Debug.LogWarning("[TowerPlacementManager] Tower data is null, cannot determine sell value!");
+            }
 
             // Free the cell
-            _gridManager.FreeCell(gridPos);
+            if (_gridManager != null)
+            {
+                _gridManager.FreeCell(gridPos);
+            }
+            else
+            {
+                Debug.LogWarning("[TowerPlacementManager] GridManager is null, cannot free cell!");
+            }
             _gridVisualizer?.UpdateCellVisual(gridPos);
 
             // Refund currency
-            GameManager.Instance.ModifyCurrency(sellValue);
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.ModifyCurrency(sellValue);
+            }
+            else
+            {
+                Debug.LogWarning("[TowerPlacementManager] GameManager not found, cannot refund currency!");
+            }
 
             // Destroy tower
             Destroy(tower.gameObject);
