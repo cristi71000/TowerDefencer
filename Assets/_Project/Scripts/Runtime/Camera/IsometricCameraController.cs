@@ -2,7 +2,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Unity.Cinemachine;
 using TowerDefense.Core;
-using TowerDefense;
 
 namespace TowerDefense.Camera
 {
