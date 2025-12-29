@@ -55,7 +55,7 @@ namespace TowerDefense.Core
 
         private void OnTriggerEnter(Collider other)
         {
-            // Check if the entering object is on the Enemy layer (Layer 8)
+            // Check if the entering object is on the Enemy layer
             if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
             {
                 OnEnemyReachedExit?.Invoke(other.gameObject);
