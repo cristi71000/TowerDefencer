@@ -284,14 +284,15 @@ namespace TowerDefense.Towers
             Debug.Log($"[TowerPlacementManager] Placed {_selectedTowerData.TowerName} at {gridPosition}");
 
             // Continue placement mode or exit based on remaining currency
-            if (GameManager.Instance.CurrentCurrency >= _selectedTowerData.PurchaseCost)
+            if (GameManager.Instance != null &&
+                GameManager.Instance.CurrentCurrency >= _selectedTowerData.PurchaseCost)
             {
                 // Can afford another, stay in placement mode
                 UpdatePreviewPosition();
             }
             else
             {
-                // Cannot afford, exit placement mode
+                // Cannot afford or GameManager unavailable, exit placement mode
                 Debug.Log("[TowerPlacementManager] Not enough currency for another tower, exiting placement mode");
                 CancelPlacement();
             }
