@@ -100,9 +100,12 @@ namespace TowerDefense.Camera
         private void HandlePanning()
         {
             if (_cameraTarget == null) return;
-            if (_panInput.sqrMagnitude < 0.01f) return;
+            
+            // Read current input value to ensure we have the most up-to-date state
+            Vector2 currentPanInput = _inputActions.Gameplay.CameraMove.ReadValue<Vector2>();
+            if (currentPanInput.sqrMagnitude < 0.01f) return;
 
-            Vector3 movement = new Vector3(_panInput.x, 0, _panInput.y);
+            Vector3 movement = new Vector3(currentPanInput.x, 0, currentPanInput.y);
             // Rotate movement by 45 degrees for isometric alignment
             movement = Quaternion.Euler(0, 45, 0) * movement;
 
@@ -167,6 +170,8 @@ namespace TowerDefense.Camera
                 float normalizedZoom = Mathf.Sign(_zoomInput);
                 _targetZoom -= normalizedZoom * _zoomSpeed;
                 _targetZoom = Mathf.Clamp(_targetZoom, _minZoom, _maxZoom);
+                // Clear zoom input after processing to avoid repeated zoom in subsequent frames
+                _zoomInput = 0f;
             }
 
             float currentZoom = _virtualCamera.Lens.OrthographicSize;
