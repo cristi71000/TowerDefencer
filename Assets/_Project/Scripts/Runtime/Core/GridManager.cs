@@ -17,6 +17,7 @@ namespace TowerDefense.Core
         [SerializeField] private float _blockCheckRadius = 0.5f;
 
         private GridCell[,] _grid;
+        private readonly Collider[] _overlapBuffer = new Collider[8];
 
         public int Width => _gridWidth;
         public int Height => _gridHeight;
@@ -31,6 +32,11 @@ namespace TowerDefense.Core
                 return;
             }
             Instance = this;
+        }
+
+        private void Start()
+        {
+            // Initialize in Start to ensure all colliders in scene are ready for physics queries
             InitializeGrid();
         }
 
@@ -60,14 +66,15 @@ namespace TowerDefense.Core
 
         private CellType DetermineCellType(Vector3 worldPosition)
         {
-            // Check for obstacles using overlap sphere
-            Collider[] hits = Physics.OverlapSphere(
+            // Check for obstacles using non-allocating overlap sphere
+            int hitCount = Physics.OverlapSphereNonAlloc(
                 worldPosition + Vector3.up * 0.5f,
                 _blockCheckRadius,
+                _overlapBuffer,
                 _blockedLayers
             );
 
-            return hits.Length > 0 ? CellType.Blocked : CellType.Empty;
+            return hitCount > 0 ? CellType.Blocked : CellType.Empty;
         }
 
         public Vector3 GridToWorldPosition(Vector2Int gridPosition)

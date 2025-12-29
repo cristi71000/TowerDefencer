@@ -90,6 +90,8 @@ namespace TowerDefense.Core
             if (_cellRenderers == null) return;
 
             GridCell cell = _gridManager.GetCell(gridPos);
+            if (cell == null) return;
+
             Renderer renderer = _cellRenderers[gridPos.x, gridPos.y];
 
             if (renderer == null) return;
