@@ -183,6 +183,27 @@ When at STEP 10, wait for Copilot review (max 30 minutes):
 - Use events for decoupled communication
 - Cache component references in Awake()
 
+### Unity Asset GUIDs (CRITICAL)
+Unity uses GUIDs to reference assets across the project. **ALL GUIDs MUST be kept in sync:**
+
+1. **Meta Files**: Every asset (scripts, prefabs, materials, etc.) has a `.meta` file with a unique GUID
+2. **Prefab References**: When a prefab references a script, the script's GUID from its `.meta` file must match
+3. **ScriptableObject References**: When an SO references a prefab or other asset, the GUID must match the target's `.meta` file
+4. **Scene References**: Scene files reference prefabs/scripts by GUID - these must match the actual asset GUIDs
+
+**When creating assets manually (YAML):**
+- Generate a unique 32-character lowercase hex GUID for each new asset
+- Use the SAME GUID in both the asset and its `.meta` file
+- When referencing other assets, use their GUID from their `.meta` file
+- Format: `{fileID: <localID>, guid: <32-char-hex>, type: <type>}`
+
+**Common fileID values:**
+- `11500000` - MonoBehaviour script reference
+- `11400000` - ScriptableObject main object
+- `1000000000000000` - Common fileID for root GameObject in prefabs. This value can differ between prefabs/projects; what matters is that fileIDs stay internally consistent within each prefab
+
+**Validation:** If Unity shows "Missing Script" or broken references, the GUIDs are out of sync
+
 ### Git Conventions
 - Commit messages follow conventional commits: `feat:`, `fix:`, `docs:`, `refactor:`, etc.
 - PRs must have descriptive titles and summaries
