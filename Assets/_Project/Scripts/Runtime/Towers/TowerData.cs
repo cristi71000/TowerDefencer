@@ -61,7 +61,7 @@ namespace TowerDefense.Towers
         public AudioClip AttackSound;
         public GameObject MuzzleFlashPrefab;
 
-        public float AttackInterval => 1f / AttackSpeed;
+        public float AttackInterval => AttackSpeed > 0f ? 1f / AttackSpeed : float.PositiveInfinity;
         public bool IsAOE => AOERadius > 0;
         public bool HasSlowEffect => SlowAmount > 0 && SlowDuration > 0;
         public bool IsSupportTower => Type == TowerType.Support;

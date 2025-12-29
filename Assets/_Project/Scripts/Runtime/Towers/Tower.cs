@@ -42,10 +42,13 @@ namespace TowerDefense.Towers
         {
             if (_towerData == null) return;
             _attackTimer += Time.deltaTime;
+            // Cap timer to prevent floating-point precision issues over long sessions
+            if (_attackTimer > _towerData.AttackInterval)
+                _attackTimer = _towerData.AttackInterval;
         }
 
         public void SetTarget(Transform target) => _currentTarget = target;
-        public bool CanAttack() => _attackTimer >= _towerData.AttackInterval;
+        public bool CanAttack() => _towerData != null && _attackTimer >= _towerData.AttackInterval;
         public void ResetAttackTimer() => _attackTimer = 0f;
         public Transform GetFirePoint() => _firePoint != null ? _firePoint : transform;
         public Transform GetTurretPivot() => _turretPivot != null ? _turretPivot : transform;

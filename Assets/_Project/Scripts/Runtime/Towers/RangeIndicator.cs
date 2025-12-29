@@ -25,6 +25,8 @@ namespace TowerDefense.Towers
 
         public void SetRadius(float radius)
         {
+            if (_lineRenderer == null) return;
+
             float angleStep = 360f / _segments;
             for (int i = 0; i < _segments; i++)
             {

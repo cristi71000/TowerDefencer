@@ -200,7 +200,7 @@ Unity uses GUIDs to reference assets across the project. **ALL GUIDs MUST be kep
 **Common fileID values:**
 - `11500000` - MonoBehaviour script reference
 - `11400000` - ScriptableObject main object
-- `1000000000000000` - Root GameObject in prefab (can vary)
+- `1000000000000000` - Common fileID for root GameObject in prefabs. This value can differ between prefabs/projects; what matters is that fileIDs stay internally consistent within each prefab
 
 **Validation:** If Unity shows "Missing Script" or broken references, the GUIDs are out of sync
 
