@@ -746,7 +746,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 830000000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31f4bab5de8ac4d4290c6f0e4f07a9d2, type: 3}
+  m_Script: {fileID: 11500000, guid: b617507da6d07e749b7efdb34e1173e1, type: 3}
   m_Name:
   m_EditorClassIdentifier:
   FollowOffset: {x: 0, y: 10, z: -10}
