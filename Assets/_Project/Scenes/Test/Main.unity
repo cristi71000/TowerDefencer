@@ -903,7 +903,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 220000000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4e5f6a7b8c9012345678901spawnpt1, type: 3}
+  m_Script: {fileID: 11500000, guid: 74544b0fe589401da08e76b6ba6a6c77, type: 3}
   m_Name:
   m_EditorClassIdentifier:
   _gizmoRadius: 1
@@ -1118,7 +1118,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 230000000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4e5f6a7b8c9012345678901exitpt01, type: 3}
+  m_Script: {fileID: 11500000, guid: 38c4da34741c4db799dbbb4c6f177158, type: 3}
   m_Name:
   m_EditorClassIdentifier:
   _gizmoRadius: 1
@@ -1351,7 +1351,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 900000000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4e5f6a7b8c9012345678901pathmg01, type: 3}
+  m_Script: {fileID: 11500000, guid: 6ede12bdb64744e7b6bbbfb0ac42e498, type: 3}
   m_Name:
   m_EditorClassIdentifier:
   _waypoints:
