@@ -10,7 +10,7 @@ namespace TowerDefense.Debug
     public class TowerSelector : MonoBehaviour
     {
         [SerializeField] private TowerData[] _availableTowers;
-        [SerializeField] private readonly KeyCode[] _towerKeys = { KeyCode.Alpha1, KeyCode.Alpha2, KeyCode.Alpha3 };
+        [SerializeField] private KeyCode[] _towerKeys = { KeyCode.Alpha1, KeyCode.Alpha2, KeyCode.Alpha3 };
 
         private void Update()
         {

@@ -281,6 +281,11 @@ namespace TowerDefense.Towers
             {
                 Debug.LogError($"[TowerPlacementManager] Failed to occupy cell at {gridPosition}!");
                 Destroy(towerObject);
+                // Refund the spent currency
+                if (GameManager.Instance != null)
+                {
+                    GameManager.Instance.ModifyCurrency(_selectedTowerData.PurchaseCost);
+                }
                 return;
             }
 
