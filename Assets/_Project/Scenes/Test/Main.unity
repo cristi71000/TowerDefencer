@@ -498,7 +498,7 @@ MonoBehaviour:
   m_Name:
   m_EditorClassIdentifier:
   _startingLives: 20
-  _startingCurrency: 100
+  _startingCurrency: 1000
 --- !u!1 &700000000
 GameObject:
   m_ObjectHideFlags: 0
