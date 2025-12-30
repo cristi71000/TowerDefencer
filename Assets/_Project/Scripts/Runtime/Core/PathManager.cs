@@ -32,7 +32,7 @@ namespace TowerDefense.Core
         {
             if (Instance != null && Instance != this)
             {
-                Debug.LogWarning($"Multiple PathManager instances detected. Destroying duplicate on {gameObject.name}.");
+                UnityEngine.Debug.LogWarning($"Multiple PathManager instances detected. Destroying duplicate on {gameObject.name}.");
                 Destroy(gameObject);
                 return;
             }

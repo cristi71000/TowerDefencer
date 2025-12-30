@@ -32,7 +32,7 @@ namespace TowerDefense.Core
         {
             if (Instance != null && Instance != this)
             {
-                Debug.LogWarning($"Multiple ExitPoint instances detected. Destroying duplicate on {gameObject.name}.");
+                UnityEngine.Debug.LogWarning($"Multiple ExitPoint instances detected. Destroying duplicate on {gameObject.name}.");
                 Destroy(gameObject);
                 return;
             }

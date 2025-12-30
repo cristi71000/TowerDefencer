@@ -18,7 +18,7 @@ namespace TowerDefense.Core
             }
             else
             {
-                Debug.LogError("GameManager reference missing on GameInitializer!");
+                UnityEngine.Debug.LogError("GameManager reference missing on GameInitializer!");
             }
         }
     }

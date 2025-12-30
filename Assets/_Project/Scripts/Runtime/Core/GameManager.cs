@@ -107,7 +107,7 @@ namespace TowerDefense.Core
         {
             if (amount < 0)
             {
-                Debug.LogWarning("TrySpendCurrency called with negative amount. Use ModifyCurrency to add currency.");
+                UnityEngine.Debug.LogWarning("TrySpendCurrency called with negative amount. Use ModifyCurrency to add currency.");
                 return false;
             }
 

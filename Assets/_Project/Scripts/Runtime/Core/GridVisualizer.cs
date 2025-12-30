@@ -37,13 +37,13 @@ namespace TowerDefense.Core
 
             if (_gridManager == null)
             {
-                Debug.LogError("[GridVisualizer] No GridManager found!");
+                UnityEngine.Debug.LogError("[GridVisualizer] No GridManager found!");
                 return;
             }
 
             if (_cellPrefab == null)
             {
-                Debug.LogError("[GridVisualizer] Cell prefab is not assigned!");
+                UnityEngine.Debug.LogError("[GridVisualizer] Cell prefab is not assigned!");
                 return;
             }
 

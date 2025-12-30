@@ -48,12 +48,12 @@ namespace TowerDefense.Camera
             else
             {
                 _targetZoom = 10f;
-                Debug.LogWarning("[CameraController] No virtual camera assigned!");
+                UnityEngine.Debug.LogWarning("[CameraController] No virtual camera assigned!");
             }
 
             if (_cameraTarget == null)
             {
-                Debug.LogWarning("[CameraController] No camera target assigned!");
+                UnityEngine.Debug.LogWarning("[CameraController] No camera target assigned!");
             }
         }
 
