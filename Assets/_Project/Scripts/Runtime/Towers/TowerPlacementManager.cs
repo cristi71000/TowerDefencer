@@ -16,7 +16,7 @@ namespace TowerDefense.Towers
         [Header("References")]
         [SerializeField] private GridManager _gridManager;
         [SerializeField] private GridVisualizer _gridVisualizer;
-        [SerializeField] private Camera _mainCamera;
+        [SerializeField] private UnityEngine.Camera _mainCamera;
         [SerializeField] private LayerMask _groundLayer;
 
         [Header("Preview")]

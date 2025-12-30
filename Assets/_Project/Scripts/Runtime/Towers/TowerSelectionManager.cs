@@ -1,5 +1,4 @@
 using System;
-using TowerDefense;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -14,7 +13,7 @@ namespace TowerDefense.Towers
         public static TowerSelectionManager Instance { get; private set; }
 
         [Header("References")]
-        [SerializeField] private Camera _mainCamera;
+        [SerializeField] private UnityEngine.Camera _mainCamera;
         [SerializeField] private LayerMask _towerLayer;
         [SerializeField] private LayerMask _groundLayer;
 
