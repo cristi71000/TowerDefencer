@@ -185,22 +185,8 @@ namespace TowerDefense.Towers
 
             _selectedTower = tower;
 
-            // Position and show selection indicator
-            if (_selectionIndicatorInstance != null)
-            {
-                _selectionIndicatorInstance.transform.position = tower.transform.position;
-                _selectionIndicatorInstance.transform.SetParent(tower.transform);
-                _selectionIndicatorInstance.SetActive(true);
-            }
-
-            // Position and show range indicator
-            if (_rangeIndicatorInstance != null && tower.Data != null)
-            {
-                _rangeIndicatorInstance.transform.position = tower.transform.position;
-                _rangeIndicatorInstance.transform.SetParent(tower.transform);
-                _rangeIndicatorInstance.SetRadius(tower.Data.Range);
-                _rangeIndicatorInstance.Show();
-            }
+            ShowSelectionIndicator(tower);
+            ShowRangeIndicator(tower);
 
             OnTowerSelected?.Invoke(tower);
 
@@ -217,19 +203,8 @@ namespace TowerDefense.Towers
             Tower previousTower = _selectedTower;
             _selectedTower = null;
 
-            // Hide selection indicator
-            if (_selectionIndicatorInstance != null)
-            {
-                _selectionIndicatorInstance.transform.SetParent(null);
-                _selectionIndicatorInstance.SetActive(false);
-            }
-
-            // Hide range indicator
-            if (_rangeIndicatorInstance != null)
-            {
-                _rangeIndicatorInstance.transform.SetParent(null);
-                _rangeIndicatorInstance.Hide();
-            }
+            HideSelectionIndicator();
+            HideRangeIndicator();
 
             OnTowerDeselected?.Invoke(previousTower);
 
@@ -244,6 +219,17 @@ namespace TowerDefense.Towers
             if (_selectedTower == null)
             {
                 Debug.Log("[TowerSelectionManager] No tower selected to sell.");
+                return;
+            }
+
+            // Check if tower was already destroyed externally
+            if (_selectedTower.gameObject == null)
+            {
+                Debug.LogWarning("[TowerSelectionManager] Selected tower was already destroyed!");
+                _selectedTower = null;
+                HideSelectionIndicator();
+                HideRangeIndicator();
+                OnTowerDeselected?.Invoke(null);
                 return;
             }
 
@@ -280,5 +266,60 @@ namespace TowerDefense.Towers
 
             Debug.Log($"[TowerSelectionManager] Changed {_selectedTower.name} targeting priority to: {_selectedTower.CurrentPriority}");
         }
+
+        #region Indicator Helper Methods
+
+        private void ShowSelectionIndicator(Tower tower)
+        {
+            if (_selectionIndicatorInstance == null)
+            {
+                Debug.LogWarning("[TowerSelectionManager] Selection indicator was destroyed! Recreating...");
+                CreateIndicators();
+            }
+
+            if (_selectionIndicatorInstance != null)
+            {
+                _selectionIndicatorInstance.transform.position = tower.transform.position;
+                _selectionIndicatorInstance.transform.SetParent(tower.transform);
+                _selectionIndicatorInstance.SetActive(true);
+            }
+        }
+
+        private void ShowRangeIndicator(Tower tower)
+        {
+            if (_rangeIndicatorInstance == null)
+            {
+                Debug.LogWarning("[TowerSelectionManager] Range indicator was destroyed! Recreating...");
+                CreateIndicators();
+            }
+
+            if (_rangeIndicatorInstance != null && tower.Data != null)
+            {
+                _rangeIndicatorInstance.transform.position = tower.transform.position;
+                _rangeIndicatorInstance.transform.SetParent(tower.transform);
+                _rangeIndicatorInstance.SetRadius(tower.Data.Range);
+                _rangeIndicatorInstance.Show();
+            }
+        }
+
+        private void HideSelectionIndicator()
+        {
+            if (_selectionIndicatorInstance != null)
+            {
+                _selectionIndicatorInstance.transform.SetParent(null);
+                _selectionIndicatorInstance.SetActive(false);
+            }
+        }
+
+        private void HideRangeIndicator()
+        {
+            if (_rangeIndicatorInstance != null)
+            {
+                _rangeIndicatorInstance.transform.SetParent(null);
+                _rangeIndicatorInstance.Hide();
+            }
+        }
+
+        #endregion
     }
 }
