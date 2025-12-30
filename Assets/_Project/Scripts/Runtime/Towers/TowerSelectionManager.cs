@@ -60,7 +60,7 @@ namespace TowerDefense.Towers
 
             if (_mainCamera == null)
             {
-                _mainCamera = Camera.main;
+                _mainCamera = UnityEngine.Camera.main;
             }
 
             CreateIndicators();
@@ -124,9 +124,9 @@ namespace TowerDefense.Towers
         private void OnValidate()
         {
             if (_selectionIndicatorPrefab == null)
-                Debug.LogWarning("[TowerSelectionManager] Selection Indicator Prefab not assigned!");
+                UnityEngine.Debug.LogWarning("[TowerSelectionManager] Selection Indicator Prefab not assigned!");
             if (_rangeIndicatorPrefab == null)
-                Debug.LogWarning("[TowerSelectionManager] Range Indicator Prefab not assigned!");
+                UnityEngine.Debug.LogWarning("[TowerSelectionManager] Range Indicator Prefab not assigned!");
         }
 
         private void OnSelectPerformed(InputAction.CallbackContext context)
@@ -189,7 +189,7 @@ namespace TowerDefense.Towers
 
             OnTowerSelected?.Invoke(tower);
 
-            Debug.Log($"[TowerSelectionManager] Selected tower: {tower.name}");
+            UnityEngine.Debug.Log($"[TowerSelectionManager] Selected tower: {tower.name}");
         }
 
         /// <summary>
@@ -207,7 +207,7 @@ namespace TowerDefense.Towers
 
             OnTowerDeselected?.Invoke(previousTower);
 
-            Debug.Log($"[TowerSelectionManager] Deselected tower: {previousTower.name}");
+            UnityEngine.Debug.Log($"[TowerSelectionManager] Deselected tower: {previousTower.name}");
         }
 
         /// <summary>
@@ -217,14 +217,14 @@ namespace TowerDefense.Towers
         {
             if (_selectedTower == null)
             {
-                Debug.Log("[TowerSelectionManager] No tower selected to sell.");
+                UnityEngine.Debug.Log("[TowerSelectionManager] No tower selected to sell.");
                 return;
             }
 
             // Check if tower was already destroyed externally
             if (_selectedTower.gameObject == null)
             {
-                Debug.LogWarning("[TowerSelectionManager] Selected tower was already destroyed!");
+                UnityEngine.Debug.LogWarning("[TowerSelectionManager] Selected tower was already destroyed!");
                 _selectedTower = null;
                 HideSelectionIndicator();
                 HideRangeIndicator();
@@ -241,7 +241,7 @@ namespace TowerDefense.Towers
             }
             else
             {
-                Debug.LogWarning("[TowerSelectionManager] TowerPlacementManager not found, cannot sell tower.");
+                UnityEngine.Debug.LogWarning("[TowerSelectionManager] TowerPlacementManager not found, cannot sell tower.");
             }
         }
 
@@ -252,7 +252,7 @@ namespace TowerDefense.Towers
         {
             if (_selectedTower == null || _selectedTower.Data == null)
             {
-                Debug.LogWarning("[TowerSelectionManager] Cannot cycle priority - no valid tower selected");
+                UnityEngine.Debug.LogWarning("[TowerSelectionManager] Cannot cycle priority - no valid tower selected");
                 return;
             }
 
@@ -263,7 +263,7 @@ namespace TowerDefense.Towers
 
             _selectedTower.CurrentPriority = priorities[nextIndex];
 
-            Debug.Log($"[TowerSelectionManager] Changed {_selectedTower.name} targeting priority to: {_selectedTower.CurrentPriority}");
+            UnityEngine.Debug.Log($"[TowerSelectionManager] Changed {_selectedTower.name} targeting priority to: {_selectedTower.CurrentPriority}");
         }
 
         #region Indicator Helper Methods
@@ -272,7 +272,7 @@ namespace TowerDefense.Towers
         {
             if (_selectionIndicatorInstance == null)
             {
-                Debug.LogWarning("[TowerSelectionManager] Selection indicator was destroyed! Recreating...");
+                UnityEngine.Debug.LogWarning("[TowerSelectionManager] Selection indicator was destroyed! Recreating...");
                 CreateIndicators();
             }
 
@@ -288,7 +288,7 @@ namespace TowerDefense.Towers
         {
             if (_rangeIndicatorInstance == null)
             {
-                Debug.LogWarning("[TowerSelectionManager] Range indicator was destroyed! Recreating...");
+                UnityEngine.Debug.LogWarning("[TowerSelectionManager] Range indicator was destroyed! Recreating...");
                 CreateIndicators();
             }
 
