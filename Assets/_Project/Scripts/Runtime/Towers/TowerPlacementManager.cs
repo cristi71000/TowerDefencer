@@ -64,6 +64,8 @@ namespace TowerDefense.Towers
 
         private void OnEnable()
         {
+            if (_inputActions == null) return;
+
             _inputActions.Gameplay.Enable();
             _inputActions.Gameplay.Select.performed += OnSelectPerformed;
             _inputActions.Gameplay.Cancel.performed += OnCancelPerformed;
@@ -71,6 +73,8 @@ namespace TowerDefense.Towers
 
         private void OnDisable()
         {
+            if (_inputActions == null) return;
+
             _inputActions.Gameplay.Select.performed -= OnSelectPerformed;
             _inputActions.Gameplay.Cancel.performed -= OnCancelPerformed;
             _inputActions.Gameplay.Disable();
@@ -205,12 +209,12 @@ namespace TowerDefense.Towers
 
             foreach (Renderer renderer in _previewInstance.GetComponentsInChildren<Renderer>())
             {
-                Material[] mats = new Material[renderer.materials.Length];
-                for (int i = 0; i < mats.Length; i++)
+                var sharedMats = renderer.sharedMaterials;
+                for (int i = 0; i < sharedMats.Length; i++)
                 {
-                    mats[i] = material;
+                    sharedMats[i] = material;
                 }
-                renderer.materials = mats;
+                renderer.sharedMaterials = sharedMats;
             }
         }
 
@@ -273,7 +277,12 @@ namespace TowerDefense.Towers
             }
 
             // Mark cell as occupied
-            _gridManager.TryOccupyCell(gridPosition, towerObject);
+            if (!_gridManager.TryOccupyCell(gridPosition, towerObject))
+            {
+                Debug.LogError($"[TowerPlacementManager] Failed to occupy cell at {gridPosition}!");
+                Destroy(towerObject);
+                return;
+            }
 
             // Update grid visual
             _gridVisualizer?.UpdateCellVisual(gridPosition);
