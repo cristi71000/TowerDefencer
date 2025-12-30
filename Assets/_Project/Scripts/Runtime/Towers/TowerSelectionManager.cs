@@ -122,6 +122,14 @@ namespace TowerDefense.Towers
             }
         }
 
+        private void OnValidate()
+        {
+            if (_selectionIndicatorPrefab == null)
+                Debug.LogWarning("[TowerSelectionManager] Selection Indicator Prefab not assigned!");
+            if (_rangeIndicatorPrefab == null)
+                Debug.LogWarning("[TowerSelectionManager] Range Indicator Prefab not assigned!");
+        }
+
         private void OnSelectPerformed(InputAction.CallbackContext context)
         {
             // Skip selection if in placement mode
@@ -257,9 +265,9 @@ namespace TowerDefense.Towers
         /// </summary>
         public void CycleTargetingPriority()
         {
-            if (_selectedTower == null)
+            if (_selectedTower == null || _selectedTower.Data == null)
             {
-                Debug.Log("[TowerSelectionManager] No tower selected to change priority.");
+                Debug.LogWarning("[TowerSelectionManager] Cannot cycle priority - no valid tower selected");
                 return;
             }
 
