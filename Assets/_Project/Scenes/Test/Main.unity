@@ -2028,6 +2028,8 @@ MonoBehaviour:
   m_EditorClassIdentifier:
   _availableTowers:
   - {fileID: 11400000, guid: e5f6071829a3b4c5d6e7f8091234567a, type: 2}
+  - {fileID: 11400000, guid: f6071829a3b4c5d6e7f8091234567ab1, type: 2}
+  - {fileID: 11400000, guid: 071829a3b4c5d6e7f8091234567ab1c2, type: 2}
   _towerKeys:
   - 49
   - 50
