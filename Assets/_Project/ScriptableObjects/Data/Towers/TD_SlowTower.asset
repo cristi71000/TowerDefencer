@@ -16,7 +16,7 @@ MonoBehaviour:
   Description: Slows enemies
   Icon: {fileID: 0}
   Type: 2
-  Prefab: {fileID: 0}
+  Prefab: {fileID: 1000000000000000, guid: a1b2c3d4e5f6071829a3b4c5d6e7f804, type: 3}
   PurchaseCost: 120
   SellValue: 60
   Range: 5
