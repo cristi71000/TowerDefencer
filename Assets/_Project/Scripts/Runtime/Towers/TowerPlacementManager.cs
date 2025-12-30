@@ -16,7 +16,7 @@ namespace TowerDefense.Towers
         [Header("References")]
         [SerializeField] private GridManager _gridManager;
         [SerializeField] private GridVisualizer _gridVisualizer;
-        [SerializeField] private Camera _mainCamera;
+        [SerializeField] private UnityEngine.Camera _mainCamera;
         [SerializeField] private LayerMask _groundLayer;
 
         [Header("Preview")]
@@ -49,7 +49,7 @@ namespace TowerDefense.Towers
             _inputActions = new GameInputActions();
 
             if (_mainCamera == null)
-                _mainCamera = Camera.main;
+                _mainCamera = UnityEngine.Camera.main;
         }
 
         private void OnDestroy()
@@ -89,7 +89,7 @@ namespace TowerDefense.Towers
 
             if (_gridManager == null)
             {
-                Debug.LogError("[TowerPlacementManager] No GridManager found!");
+                UnityEngine.Debug.LogError("[TowerPlacementManager] No GridManager found!");
             }
         }
 
@@ -108,20 +108,20 @@ namespace TowerDefense.Towers
         {
             if (towerData == null || towerData.Prefab == null)
             {
-                Debug.LogError("[TowerPlacementManager] Invalid tower data for placement!");
+                UnityEngine.Debug.LogError("[TowerPlacementManager] Invalid tower data for placement!");
                 return;
             }
 
             // Check if player can afford
             if (GameManager.Instance == null)
             {
-                Debug.LogError("[TowerPlacementManager] GameManager not found!");
+                UnityEngine.Debug.LogError("[TowerPlacementManager] GameManager not found!");
                 return;
             }
 
             if (GameManager.Instance.CurrentCurrency < towerData.PurchaseCost)
             {
-                Debug.Log($"[TowerPlacementManager] Not enough currency to place {towerData.TowerName}! " +
+                UnityEngine.Debug.Log($"[TowerPlacementManager] Not enough currency to place {towerData.TowerName}! " +
                          $"Need {towerData.PurchaseCost}, have {GameManager.Instance.CurrentCurrency}");
                 return;
             }
@@ -134,7 +134,7 @@ namespace TowerDefense.Towers
             CreatePreview();
             _gridVisualizer?.SetGridVisible(true);
 
-            Debug.Log($"[TowerPlacementManager] Started placement mode for {towerData.TowerName}");
+            UnityEngine.Debug.Log($"[TowerPlacementManager] Started placement mode for {towerData.TowerName}");
         }
 
         /// <summary>
@@ -230,7 +230,7 @@ namespace TowerDefense.Towers
             if (_isInPlacementMode)
             {
                 CancelPlacement();
-                Debug.Log("[TowerPlacementManager] Placement cancelled");
+                UnityEngine.Debug.Log("[TowerPlacementManager] Placement cancelled");
             }
         }
 
@@ -238,13 +238,13 @@ namespace TowerDefense.Towers
         {
             if (!_isPlacementValid)
             {
-                Debug.Log("[TowerPlacementManager] Cannot place tower here!");
+                UnityEngine.Debug.Log("[TowerPlacementManager] Cannot place tower here!");
                 return;
             }
 
             if (GameManager.Instance == null)
             {
-                Debug.LogError("[TowerPlacementManager] GameManager not found!");
+                UnityEngine.Debug.LogError("[TowerPlacementManager] GameManager not found!");
                 CancelPlacement();
                 return;
             }
@@ -252,7 +252,7 @@ namespace TowerDefense.Towers
             // Check currency again (in case it changed)
             if (!GameManager.Instance.TrySpendCurrency(_selectedTowerData.PurchaseCost))
             {
-                Debug.Log("[TowerPlacementManager] Not enough currency!");
+                UnityEngine.Debug.Log("[TowerPlacementManager] Not enough currency!");
                 CancelPlacement();
                 return;
             }
@@ -279,7 +279,7 @@ namespace TowerDefense.Towers
             // Mark cell as occupied
             if (!_gridManager.TryOccupyCell(gridPosition, towerObject))
             {
-                Debug.LogError($"[TowerPlacementManager] Failed to occupy cell at {gridPosition}!");
+                UnityEngine.Debug.LogError($"[TowerPlacementManager] Failed to occupy cell at {gridPosition}!");
                 Destroy(towerObject);
                 // Refund the spent currency
                 if (GameManager.Instance != null)
@@ -295,7 +295,7 @@ namespace TowerDefense.Towers
             // Raise event
             _onTowerPlaced?.RaiseEvent(worldPosition);
 
-            Debug.Log($"[TowerPlacementManager] Placed {_selectedTowerData.TowerName} at {gridPosition}");
+            UnityEngine.Debug.Log($"[TowerPlacementManager] Placed {_selectedTowerData.TowerName} at {gridPosition}");
 
             // Continue placement mode or exit based on remaining currency
             if (GameManager.Instance != null &&
@@ -307,7 +307,7 @@ namespace TowerDefense.Towers
             else
             {
                 // Cannot afford or GameManager unavailable, exit placement mode
-                Debug.Log("[TowerPlacementManager] Not enough currency for another tower, exiting placement mode");
+                UnityEngine.Debug.Log("[TowerPlacementManager] Not enough currency for another tower, exiting placement mode");
                 CancelPlacement();
             }
         }
@@ -330,7 +330,7 @@ namespace TowerDefense.Towers
             }
             else
             {
-                Debug.LogWarning("[TowerPlacementManager] Tower data is null, cannot determine sell value!");
+                UnityEngine.Debug.LogWarning("[TowerPlacementManager] Tower data is null, cannot determine sell value!");
             }
 
             // Free the cell
@@ -340,7 +340,7 @@ namespace TowerDefense.Towers
             }
             else
             {
-                Debug.LogWarning("[TowerPlacementManager] GridManager is null, cannot free cell!");
+                UnityEngine.Debug.LogWarning("[TowerPlacementManager] GridManager is null, cannot free cell!");
             }
             _gridVisualizer?.UpdateCellVisual(gridPos);
 
@@ -351,13 +351,13 @@ namespace TowerDefense.Towers
             }
             else
             {
-                Debug.LogWarning("[TowerPlacementManager] GameManager not found, cannot refund currency!");
+                UnityEngine.Debug.LogWarning("[TowerPlacementManager] GameManager not found, cannot refund currency!");
             }
 
             // Destroy tower
             Destroy(tower.gameObject);
 
-            Debug.Log($"[TowerPlacementManager] Sold tower for {sellValue} currency");
+            UnityEngine.Debug.Log($"[TowerPlacementManager] Sold tower for {sellValue} currency");
         }
     }
 }
