@@ -29,15 +29,16 @@ namespace TowerDefense.Enemies
         private void Awake()
         {
             _navMeshAgent = GetComponent<NavMeshAgent>();
-
-            if (_enemyData != null)
-            {
-                Initialize(_enemyData);
-            }
         }
 
         public void Initialize(EnemyData data)
         {
+            if (data == null)
+            {
+                Debug.LogError($"Enemy.Initialize called with null data on {gameObject.name}");
+                return;
+            }
+
             _enemyData = data;
             _currentHealth = data.MaxHealth;
             _isDead = false;
