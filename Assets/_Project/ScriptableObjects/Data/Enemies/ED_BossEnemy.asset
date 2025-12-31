@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1b2c3d4e5f6071829a3b4c5d6e7f891, type: 3}
+  m_Name: ED_BossEnemy
+  m_EditorClassIdentifier:
+  EnemyName: Boss Enemy
+  Description: A powerful mini-boss unit with massive health and moderate speed.
+    Defeating this enemy yields significant rewards.
+  Icon: {fileID: 0}
+  Type: 4
+  Prefab: {fileID: 1000000000000000, guid: 2a3b4c5d6e7f89012a3b4c5d6e7f8901, type: 3}
+  MaxHealth: 1000
+  MoveSpeed: 2
+  Damage: 5
+  KillReward: 100
+  DeathSound: {fileID: 0}
+  HitSound: {fileID: 0}
+  DeathVFXPrefab: {fileID: 0}
