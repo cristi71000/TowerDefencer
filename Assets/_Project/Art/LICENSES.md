@@ -12,6 +12,18 @@ The tower models in this project use Unity's built-in primitive shapes (Cube, Cy
 - **AOETower**: Cube base with mortar-style cylinder - Orange colored
 - **SlowTower**: Cylinder base with pillar and sphere orb - Blue colored
 
+## Enemy Models
+
+The enemy models in this project use Unity's built-in primitive shapes (Cube, Cylinder, Sphere) with custom materials. These primitives are part of Unity and do not require any external license.
+
+### Enemy Designs
+
+- **BasicEnemy**: Cube body with cube head - Red-brown colored
+- **FastEnemy**: Streamlined cylinder body with sphere head - Green colored
+- **TankEnemy**: Large cube body with tread details - Dark gray colored
+- **FlyingEnemy**: Central sphere with 4 rotor spheres - Yellow colored
+- **BossEnemy**: Large imposing body with shoulder pads and crown - Purple colored
+
 ## Materials
 
 All materials in this project use Unity's Universal Render Pipeline (URP) Lit shader. Materials were created specifically for this project.
@@ -25,6 +37,16 @@ All materials in this project use Unity's Universal Render Pipeline (URP) Lit sh
 | M_Tower_Slow | (0.2, 0.5, 0.9) | Blue - Slow tower accent |
 | M_Tower_Base | (0.4, 0.4, 0.45) | Gray - Shared base material |
 | M_Tower_Barrel | (0.25, 0.25, 0.28) | Dark gray - Barrel/weapon material |
+### Enemy Materials
+
+| Material | Color (RGB) | Description |
+|----------|-------------|-------------|
+| M_Enemy_Basic | (0.7, 0.3, 0.2) | Red-brown - Basic enemy |
+| M_Enemy_Fast | (0.2, 0.7, 0.3) | Green - Fast enemy |
+| M_Enemy_Tank | (0.3, 0.3, 0.35) | Dark gray - Tank enemy |
+| M_Enemy_Flying | (0.9, 0.8, 0.2) | Yellow - Flying enemy |
+| M_Enemy_Boss | (0.5, 0.2, 0.6) | Purple - Boss enemy |
+| M_Enemy_Accent | (0.15, 0.15, 0.18) | Dark accent - Shared details |
 
 ## Recommended External Assets
 
@@ -51,4 +73,4 @@ When importing external assets:
 
 ---
 
-Last updated: 2025-12-30
+Last updated: 2025-12-31
