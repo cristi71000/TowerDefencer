@@ -35,7 +35,7 @@ namespace TowerDefense.Enemies
         {
             if (data == null)
             {
-                Debug.LogError($"Enemy.Initialize called with null data on {gameObject.name}");
+                UnityEngine.Debug.LogError($"Enemy.Initialize called with null data on {gameObject.name}");
                 return;
             }
 
