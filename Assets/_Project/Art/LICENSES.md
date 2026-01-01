@@ -56,8 +56,8 @@ The environment models in this project use Unity's built-in primitive shapes (Cu
 
 - **GroundTile**: 1x1 flat cube tile for terrain - Layer 6 (Ground)
 - **PathTile**: 1x1 flat cube tile for enemy paths - Layer 12 (Path)
-- **SpawnPortal**: Archway gate with two pillars and base - Enemy spawn point
-- **ExitFortress**: Fortress with central building and four corner towers - Player's base
+- **SpawnPortal**: Archway gate with two pillars and base - Enemy spawn point - Layer 10 (Obstacle)
+- **ExitFortress**: Fortress with central building and four corner towers - Player's base - Layer 10 (Obstacle)
 - **GridCell**: Thin transparent overlay for tower placement - Layer 11 (Buildable)
 - **Tree_Pine**: Stylized pine tree with trunk and layered cone foliage - Layer 10 (Obstacle)
 - **Rock_Medium**: Multi-part rock formation - Layer 10 (Obstacle)
