@@ -205,6 +205,7 @@ Unity uses GUIDs to reference assets across the project. **ALL GUIDs MUST be kep
 **Validation:** If Unity shows "Missing Script" or broken references, the GUIDs are out of sync
 
 ### Git Conventions
+- **Default branch is `main`** - All PRs target `main`, never old feature branches
 - Commit messages follow conventional commits: `feat:`, `fix:`, `docs:`, `refactor:`, etc.
 - PRs must have descriptive titles and summaries
 - Squash merge to keep history clean
