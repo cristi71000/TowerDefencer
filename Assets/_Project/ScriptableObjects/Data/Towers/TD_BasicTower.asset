@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier:
   TowerName: Basic Tower
   Description: A reliable tower with balanced damage and fire rate. Good for beginners.
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: ba975d8b3e024ea38fade75ce811d428, type: 3}
   Type: 0
   Prefab: {fileID: 1000000000000000, guid: d4e5f6071829a3b4c5d6e7f809123456, type: 3}
   PurchaseCost: 100
