@@ -48,6 +48,35 @@ All materials in this project use Unity's Universal Render Pipeline (URP) Lit sh
 | M_Enemy_Boss | (0.5, 0.2, 0.6) | Purple - Boss enemy |
 | M_Enemy_Accent | (0.15, 0.15, 0.18) | Dark accent - Shared details |
 
+## Environment Models
+
+The environment models in this project use Unity's built-in primitive shapes (Cube, Cylinder, Sphere) with custom materials. These primitives are part of Unity and do not require any external license.
+
+### Environment Designs
+
+- **GroundTile**: 1x1 flat cube tile for terrain - Layer 6 (Ground)
+- **PathTile**: 1x1 flat cube tile for enemy paths - Layer 12 (Path)
+- **SpawnPortal**: Archway gate with two pillars and base - Enemy spawn point - Layer 10 (Obstacle)
+- **ExitFortress**: Fortress with central building and four corner towers - Player's base - Layer 10 (Obstacle)
+- **GridCell**: Thin transparent overlay for tower placement - Layer 11 (Buildable)
+- **Tree_Pine**: Stylized pine tree with trunk and layered cone foliage - Layer 10 (Obstacle)
+- **Rock_Medium**: Multi-part rock formation - Layer 10 (Obstacle)
+- **Fence_Segment**: Wooden fence with two posts and two rails - Layer 10 (Obstacle)
+
+### Environment Materials
+
+| Material | Color (RGB) | Description |
+|----------|-------------|-------------|
+| M_Ground | (0.35, 0.55, 0.25) | Grass green - Ground tiles |
+| M_Path | (0.6, 0.5, 0.35) | Sandy brown - Path/road tiles |
+| M_SpawnPortal | (0.6, 0.2, 0.7) | Purple/magenta with emission - Spawn portal accent |
+| M_ExitFortress | (0.3, 0.4, 0.6) | Bluish gray - Fortress stone |
+| M_GridCell | (0.3, 0.8, 0.4, 0.3) | Semi-transparent green - Placement indicator |
+| M_Tree_Leaves | (0.2, 0.4, 0.2) | Dark green - Tree foliage |
+| M_Tree_Trunk | (0.35, 0.25, 0.15) | Brown - Tree bark |
+| M_Rock | (0.5, 0.5, 0.5) | Gray - Stone/rock |
+| M_Fence | (0.45, 0.35, 0.25) | Wood brown - Fence material |
+
 ## Recommended External Assets
 
 For production-quality tower models, consider using:
@@ -73,4 +102,4 @@ When importing external assets:
 
 ---
 
-Last updated: 2025-12-31
+Last updated: 2026-01-01
