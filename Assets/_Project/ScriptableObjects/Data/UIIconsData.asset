@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93b4150f62504456a58dbc3edd7bd5f8, type: 3}
+  m_Name: UIIconsData
+  m_EditorClassIdentifier:
+  CurrencyIcon: {fileID: 21300000, guid: 6be29d3d78b64549a884b4338be8be72, type: 3}
+  LivesIcon: {fileID: 21300000, guid: e8e5f77fd6e64d8cbbf31253a262b5ff, type: 3}
+  WaveIcon: {fileID: 21300000, guid: 336e754ad2b1482d92a48b2ac252b83e, type: 3}
+  PlayIcon: {fileID: 21300000, guid: aa6f8f4c55984201b7f13fdba8958057, type: 3}
+  PauseIcon: {fileID: 21300000, guid: 852cd2aab8f94023a6d1756cda1a5c30, type: 3}
+  FastForwardIcon: {fileID: 21300000, guid: ec28a587365546e987f6d6bca62be902, type: 3}
+  SettingsIcon: {fileID: 21300000, guid: 814f17a7cb594869854096dcf00362f4, type: 3}
+  TargetFirstIcon: {fileID: 21300000, guid: 11884433737a4b2e9ce374488d654a08, type: 3}
+  TargetNearestIcon: {fileID: 21300000, guid: 9e0c7278a0b842a3a2a8e999e98a51fc, type: 3}
+  TargetStrongestIcon: {fileID: 21300000, guid: a9df71b646b14b3abff223addb7a6ebc, type: 3}
+  TargetWeakestIcon: {fileID: 21300000, guid: 7b566b4a84e649acaca695950c3eeeb7, type: 3}
+  TargetFastestIcon: {fileID: 21300000, guid: f974d625ce284e669772cd2bc73a8988, type: 3}
+  HealthBarBackground: {fileID: 21300000, guid: 5cee788af5af4faebd71ff656e536252, type: 3}
+  HealthBarFillGreen: {fileID: 21300000, guid: 671d974ce26d40d98f535b2c57c02b58, type: 3}
+  HealthBarFillYellow: {fileID: 21300000, guid: dbcbb8496d0c40fc8c9423d3c299cbde, type: 3}
+  HealthBarFillRed: {fileID: 21300000, guid: b73dc50957bd440786b912d477c01a7e, type: 3}
+  PanelDark: {fileID: 21300000, guid: 05b83f0ad22f4e8e942f41b03c1dd58a, type: 3}
+  PanelLight: {fileID: 21300000, guid: ebff31086ab5401786ad51c8dd0fcbd9, type: 3}
+  ButtonNormal: {fileID: 21300000, guid: 7c1782f5810b439281662f22e41c0f7a, type: 3}
+  ButtonHover: {fileID: 21300000, guid: 315c681ff2f8410db6cd60a9939f7f31, type: 3}
+  ButtonPressed: {fileID: 21300000, guid: c3459a2090d747eaa81ace9e51c8ef34, type: 3}
