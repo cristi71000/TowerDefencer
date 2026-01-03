@@ -79,18 +79,26 @@ This project follows a **Sacred Process** that MUST be followed without deviatio
 
 ### The Sacred Process Steps
 
-> **Note**: STEPS 3 and 6 are internal reviews performed by AI agents (Code Reviewer, QA Tester)
-> before the PR is created. STEPS 10-12 are GitHub PR-based reviews by Copilot after PR creation.
+> **CRITICAL RULES**:
+> - **STEPS 2-8 are ALL LOCAL WORK** - NO git commits, NO git pushes until STEP 9
+> - **Only the Developer agent can modify code** - Orchestrator and other agents NEVER write/edit code
+> - STEPS 3 and 6 are internal reviews performed by AI agents before the PR is created
+> - STEPS 10-12 are GitHub PR-based reviews by Copilot after PR creation
+
+| Phase | Steps | Git Status |
+|-------|-------|------------|
+| **LOCAL DEVELOPMENT** | STEPS 2-8 | NO commits, NO pushes - all changes are uncommitted |
+| **PR PHASE** | STEPS 9-13 | Commit, push, PR created |
 
 1. **STEP 1: Issue Selection** - Lead selects the next issue to work on based on the issue number in the TITLE
-2. **STEP 2: Development** - Developer implements the issue on a feature branch
-3. **STEP 3: Code Review (Internal)** - AI Reviewer reviews the implementation locally
+2. **STEP 2: Development** - Developer implements the issue on a feature branch (**LOCAL - no commit**)
+3. **STEP 3: Code Review (Internal)** - AI Reviewer reviews the **LOCAL uncommitted** implementation
 4. **STEP 4: Lead Analyzes Review** - Lead determines if fixes are needed
-5. **STEP 5: Review Fixes** - Developer fixes any issues found (loop back to STEP 3)
-6. **STEP 6: QA Testing (Internal)** - AI Tester validates the implementation locally
+5. **STEP 5: Review Fixes** - Developer fixes issues **locally** (loop back to STEP 3)
+6. **STEP 6: QA Testing (Internal)** - AI Tester validates the **LOCAL uncommitted** implementation
 7. **STEP 7: Lead Analyzes QA** - Lead determines if fixes are needed
-8. **STEP 8: QA Fixes** - Developer fixes any issues found (loop back to STEP 3)
-9. **STEP 9: Create PR** - Developer creates a Pull Request
+8. **STEP 8: QA Fixes** - Developer fixes issues **locally** (loop back to STEP 3)
+9. **STEP 9: Create PR** - Developer **COMMITS all changes, PUSHES branch**, creates Pull Request
 10. **STEP 10: Await Copilot Review** - Wait for GitHub Copilot review (up to 30 minutes max)
 11. **STEP 11: Analyze Copilot Feedback** - Lead analyzes any Copilot comments
 12. **STEP 12: Copilot Fixes** - Developer addresses Copilot feedback, pushes changes, returns to STEP 3
