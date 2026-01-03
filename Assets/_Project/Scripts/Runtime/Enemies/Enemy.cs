@@ -15,15 +15,18 @@ namespace TowerDefense.Enemies
         private NavMeshAgent _navMeshAgent;
         private float _currentHealth;
         private bool _isDead;
+        private bool _hasReachedEnd;
 
         public EnemyData Data => _enemyData;
         public float CurrentHealth => _currentHealth;
         public float MaxHealth => _enemyData != null ? _enemyData.MaxHealth : 0f;
         public float HealthPercent => MaxHealth > 0 ? _currentHealth / MaxHealth : 0f;
         public bool IsDead => _isDead;
+        public bool HasReachedEnd => _hasReachedEnd;
         public Transform HealthBarAnchor => _healthBarAnchor;
 
         public event System.Action<Enemy> OnDeath;
+        public event System.Action<Enemy> OnReachedEnd;
         public event System.Action<Enemy, float> OnDamageTaken;
 
         private void Awake()
@@ -35,13 +38,14 @@ namespace TowerDefense.Enemies
         {
             if (data == null)
             {
-                UnityEngine.Debug.LogError($"Enemy.Initialize called with null data on {gameObject.name}");
+                Debug.LogError($"Enemy.Initialize called with null data on {gameObject.name}");
                 return;
             }
 
             _enemyData = data;
             _currentHealth = data.MaxHealth;
             _isDead = false;
+            _hasReachedEnd = false;
 
             if (_navMeshAgent != null)
             {
@@ -50,9 +54,33 @@ namespace TowerDefense.Enemies
             }
         }
 
+        /// <summary>
+        /// Resets the enemy state for object pool reuse.
+        /// Call this when returning the enemy to the pool.
+        /// </summary>
+        public void ResetEnemy()
+        {
+            _currentHealth = 0f;
+            _isDead = false;
+            _hasReachedEnd = false;
+            _enemyData = null;
+
+            // Clear event subscribers to prevent stale references
+            OnDeath = null;
+            OnReachedEnd = null;
+            OnDamageTaken = null;
+
+            // Reset NavMeshAgent state
+            if (_navMeshAgent != null)
+            {
+                _navMeshAgent.enabled = false;
+                _navMeshAgent.isStopped = false;
+            }
+        }
+
         public void TakeDamage(float damage)
         {
-            if (_isDead) return;
+            if (_isDead || _hasReachedEnd) return;
 
             _currentHealth -= damage;
             OnDamageTaken?.Invoke(this, damage);
@@ -83,8 +111,26 @@ namespace TowerDefense.Enemies
                 Instantiate(_enemyData.DeathVFXPrefab, transform.position, Quaternion.identity);
             }
 
-            // Destroy this enemy
-            Destroy(gameObject);
+            // Note: Do NOT destroy the gameObject here - let the pool manager handle it
+        }
+
+        /// <summary>
+        /// Called when the enemy reaches the exit point.
+        /// </summary>
+        public void ReachEnd()
+        {
+            if (_isDead || _hasReachedEnd) return;
+
+            _hasReachedEnd = true;
+
+            if (_navMeshAgent != null)
+            {
+                _navMeshAgent.enabled = false;
+            }
+
+            OnReachedEnd?.Invoke(this);
+
+            // Note: Do NOT destroy the gameObject here - let the pool manager handle it
         }
 
         public void SetDestination(Vector3 destination)
