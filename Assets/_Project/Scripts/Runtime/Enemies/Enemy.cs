@@ -11,11 +11,14 @@ namespace TowerDefense.Enemies
 
         [Header("References")]
         [SerializeField] private Transform _healthBarAnchor;
+        [SerializeField] private EnemyHealthBar _healthBar;
+        [SerializeField] private EnemyHealthBar _healthBarPrefab;
 
         private NavMeshAgent _navMeshAgent;
         private float _currentHealth;
         private bool _isDead;
         private bool _hasReachedEnd;
+        private bool _healthBarInstantiated;
 
         public EnemyData Data => _enemyData;
         public float CurrentHealth => _currentHealth;
@@ -52,6 +55,28 @@ namespace TowerDefense.Enemies
                 _navMeshAgent.speed = data.MoveSpeed;
                 _navMeshAgent.enabled = !data.IsFlying;
             }
+
+            // Instantiate health bar from prefab if not already assigned
+            EnsureHealthBar();
+
+            // Initialize health bar to full
+            _healthBar?.SetHealthImmediate(1f);
+        }
+
+        /// <summary>
+        /// Ensures a health bar exists, instantiating from prefab if needed.
+        /// </summary>
+        private void EnsureHealthBar()
+        {
+            if (_healthBar != null) return;
+
+            if (_healthBarPrefab != null && _healthBarAnchor != null)
+            {
+                _healthBar = Instantiate(_healthBarPrefab, _healthBarAnchor);
+                _healthBar.transform.localPosition = Vector3.zero;
+                _healthBar.transform.localRotation = Quaternion.identity;
+                _healthBarInstantiated = true;
+            }
         }
 
         /// <summary>
@@ -76,6 +101,9 @@ namespace TowerDefense.Enemies
                 _navMeshAgent.enabled = false;
                 _navMeshAgent.isStopped = false;
             }
+
+            // Reset health bar for pool reuse
+            _healthBar?.Reset();
         }
 
         public void TakeDamage(float damage)
@@ -84,6 +112,9 @@ namespace TowerDefense.Enemies
 
             _currentHealth -= damage;
             OnDamageTaken?.Invoke(this, damage);
+
+            // Update health bar
+            _healthBar?.SetHealth(HealthPercent);
 
             if (_currentHealth <= 0f)
             {
