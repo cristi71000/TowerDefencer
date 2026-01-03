@@ -2,7 +2,8 @@
     "name": "TowerDefense.Editor",
     "rootNamespace": "TowerDefense.Editor",
     "references": [
-        "TowerDefense.Runtime"
+        "TowerDefense.Runtime",
+        "Unity.AI.Navigation"
     ],
     "includePlatforms": [
         "Editor"
