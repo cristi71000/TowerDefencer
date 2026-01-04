@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using TowerDefense.Core;
+using TowerDefense.UI;
 
 namespace TowerDefense.Enemies
 {
@@ -11,6 +12,9 @@ namespace TowerDefense.Enemies
     public class EnemySpawner : MonoBehaviour
     {
         public static EnemySpawner Instance { get; private set; }
+
+        [Header("Currency Popup")]
+        [SerializeField] private CurrencyPopup _currencyPopupPrefab;
 
         [Header("Debug")]
         [SerializeField] private bool _logSpawnEvents;
@@ -175,6 +179,9 @@ namespace TowerDefense.Enemies
             {
                 GameManager.Instance.ModifyCurrency(enemy.Data.KillReward);
 
+                // Spawn currency popup
+                SpawnCurrencyPopup(enemy.transform.position, enemy.Data.KillReward);
+
                 if (_logSpawnEvents)
                 {
                     Debug.Log($"Enemy '{enemy.Data.EnemyName}' killed. Awarded {enemy.Data.KillReward} currency.");
@@ -185,6 +192,18 @@ namespace TowerDefense.Enemies
 
             // Return to pool
             ReturnEnemyToPool(enemy);
+        }
+
+        /// <summary>
+        /// Spawns a currency popup at the specified position showing the reward amount.
+        /// </summary>
+        private void SpawnCurrencyPopup(Vector3 position, int amount)
+        {
+            if (_currencyPopupPrefab == null) return;
+
+            Vector3 popupPosition = position + Vector3.up * 0.5f;
+            CurrencyPopup popup = Instantiate(_currencyPopupPrefab, popupPosition, Quaternion.identity);
+            popup.Initialize(amount);
         }
 
         /// <summary>
