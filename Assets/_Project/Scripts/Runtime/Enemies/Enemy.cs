@@ -12,6 +12,7 @@ namespace TowerDefense.Enemies
         [Header("References")]
         [SerializeField] private Transform _healthBarAnchor;
         [SerializeField] private GameObject _healthBarPrefab;
+        [SerializeField] private EnemyDeathEffect _deathEffect;
 
         private NavMeshAgent _navMeshAgent;
         private EnemyHealthBar _healthBar;
@@ -132,10 +133,14 @@ namespace TowerDefense.Enemies
 
             OnDeath?.Invoke(this);
 
-            // Spawn death VFX if configured
-            if (_enemyData != null && _enemyData.DeathVFXPrefab != null)
+            // Play death effect via EnemyDeathEffect component
+            _deathEffect?.PlayDeathEffect(transform.position, 1f);
+
+            // Spawn death VFX if configured in EnemyData (fallback)
+            if (_deathEffect == null && _enemyData != null && _enemyData.DeathVFXPrefab != null)
             {
-                Instantiate(_enemyData.DeathVFXPrefab, transform.position, Quaternion.identity);
+                GameObject vfx = Instantiate(_enemyData.DeathVFXPrefab, transform.position, Quaternion.identity);
+                Destroy(vfx, 2f); // Auto-cleanup after 2 seconds
             }
 
             // Note: Do NOT destroy the gameObject here - let the pool manager handle it
