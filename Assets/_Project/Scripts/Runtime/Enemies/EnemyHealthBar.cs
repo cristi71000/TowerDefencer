@@ -32,6 +32,7 @@ namespace TowerDefense.Enemies
         private float _currentFillAmount = 1f;
         private float _targetAlpha = 1f;
         private bool _isInitialized;
+        private bool _cameraCacheFailed;
 
         public bool HideWhenFull
         {
@@ -46,6 +47,8 @@ namespace TowerDefense.Enemies
 
         private void OnEnable()
         {
+            // Reset the cache failed flag when re-enabled (camera may be available now)
+            _cameraCacheFailed = false;
             CacheMainCamera();
         }
 
@@ -65,6 +68,7 @@ namespace TowerDefense.Enemies
         public void Initialize(float healthPercent)
         {
             _isInitialized = true;
+            _cameraCacheFailed = false;
             _targetFillAmount = Mathf.Clamp01(healthPercent);
             _currentFillAmount = _targetFillAmount;
 
@@ -97,6 +101,7 @@ namespace TowerDefense.Enemies
             _currentFillAmount = 1f;
             _targetAlpha = 1f;
             _isInitialized = false;
+            _cameraCacheFailed = false;
 
             if (_fillImage != null)
             {
@@ -131,9 +136,15 @@ namespace TowerDefense.Enemies
 
         private void CacheMainCamera()
         {
+            if (_cameraCacheFailed) return;
+
             if (Camera.main != null)
             {
                 _cameraTransform = Camera.main.transform;
+            }
+            else
+            {
+                _cameraCacheFailed = true;
             }
         }
 
@@ -141,7 +152,11 @@ namespace TowerDefense.Enemies
         {
             if (_cameraTransform == null)
             {
-                CacheMainCamera();
+                // Only try to cache if we haven't already failed
+                if (!_cameraCacheFailed)
+                {
+                    CacheMainCamera();
+                }
                 if (_cameraTransform == null) return;
             }
 
@@ -210,13 +225,23 @@ namespace TowerDefense.Enemies
             else if (fillPercent <= _midHealthThreshold)
             {
                 // Interpolate between red and yellow
-                float t = (fillPercent - _lowHealthThreshold) / (_midHealthThreshold - _lowHealthThreshold);
+                float range = _midHealthThreshold - _lowHealthThreshold;
+                float t = 0f;
+                if (!Mathf.Approximately(range, 0f))
+                {
+                    t = (fillPercent - _lowHealthThreshold) / range;
+                }
                 targetColor = Color.Lerp(_lowHealthColor, _midHealthColor, t);
             }
             else
             {
                 // Interpolate between yellow and green
-                float t = (fillPercent - _midHealthThreshold) / (1f - _midHealthThreshold);
+                float range = 1f - _midHealthThreshold;
+                float t = 0f;
+                if (!Mathf.Approximately(range, 0f))
+                {
+                    t = (fillPercent - _midHealthThreshold) / range;
+                }
                 targetColor = Color.Lerp(_midHealthColor, _fullHealthColor, t);
             }
 
