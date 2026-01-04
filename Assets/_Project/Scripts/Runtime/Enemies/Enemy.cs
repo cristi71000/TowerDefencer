@@ -11,8 +11,10 @@ namespace TowerDefense.Enemies
 
         [Header("References")]
         [SerializeField] private Transform _healthBarAnchor;
+        [SerializeField] private GameObject _healthBarPrefab;
 
         private NavMeshAgent _navMeshAgent;
+        private EnemyHealthBar _healthBar;
         private float _currentHealth;
         private bool _isDead;
         private bool _hasReachedEnd;
@@ -52,6 +54,13 @@ namespace TowerDefense.Enemies
                 _navMeshAgent.speed = data.MoveSpeed;
                 _navMeshAgent.enabled = !data.IsFlying;
             }
+
+            // Initialize health bar
+            EnsureHealthBar();
+            if (_healthBar != null)
+            {
+                _healthBar.Initialize(HealthPercent);
+            }
         }
 
         /// <summary>
@@ -76,6 +85,12 @@ namespace TowerDefense.Enemies
                 _navMeshAgent.enabled = false;
                 _navMeshAgent.isStopped = false;
             }
+
+            // Reset health bar for pool reuse
+            if (_healthBar != null)
+            {
+                _healthBar.ResetHealthBar();
+            }
         }
 
         public void TakeDamage(float damage)
@@ -84,6 +99,12 @@ namespace TowerDefense.Enemies
 
             _currentHealth -= damage;
             OnDamageTaken?.Invoke(this, damage);
+
+            // Update health bar
+            if (_healthBar != null)
+            {
+                _healthBar.UpdateHealth(HealthPercent);
+            }
 
             if (_currentHealth <= 0f)
             {
@@ -101,6 +122,12 @@ namespace TowerDefense.Enemies
             if (_navMeshAgent != null)
             {
                 _navMeshAgent.enabled = false;
+            }
+
+            // Hide health bar on death
+            if (_healthBar != null)
+            {
+                _healthBar.Hide();
             }
 
             OnDeath?.Invoke(this);
@@ -126,6 +153,12 @@ namespace TowerDefense.Enemies
             if (_navMeshAgent != null)
             {
                 _navMeshAgent.enabled = false;
+            }
+
+            // Hide health bar when reaching end
+            if (_healthBar != null)
+            {
+                _healthBar.Hide();
             }
 
             OnReachedEnd?.Invoke(this);
@@ -154,6 +187,31 @@ namespace TowerDefense.Enemies
             if (_navMeshAgent != null && _navMeshAgent.enabled && _navMeshAgent.isOnNavMesh)
             {
                 _navMeshAgent.isStopped = false;
+            }
+        }
+
+        /// <summary>
+        /// Ensures the health bar is instantiated from the prefab if not already present.
+        /// </summary>
+        private void EnsureHealthBar()
+        {
+            if (_healthBar != null) return;
+
+            if (_healthBarPrefab == null)
+            {
+                Debug.LogWarning($"Health bar prefab not assigned on {gameObject.name}");
+                return;
+            }
+
+            Transform anchorTransform = _healthBarAnchor != null ? _healthBarAnchor : transform;
+            GameObject healthBarInstance = Instantiate(_healthBarPrefab, anchorTransform.position, Quaternion.identity, anchorTransform);
+            healthBarInstance.transform.localPosition = Vector3.zero;
+            _healthBar = healthBarInstance.GetComponent<EnemyHealthBar>();
+
+            if (_healthBar == null)
+            {
+                Debug.LogError($"Health bar prefab does not have EnemyHealthBar component on {gameObject.name}");
+                Destroy(healthBarInstance);
             }
         }
 
