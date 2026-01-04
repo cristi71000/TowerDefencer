@@ -76,6 +76,7 @@ MonoBehaviour:
   m_EditorClassIdentifier:
   _enemyData: {fileID: 0}
   _healthBarAnchor: {fileID: 4000000000000006}
+  _healthBarPrefab: {fileID: 1000000000000000, guid: e8f9a0b1c2d3e4f5a6b7c8d9e0f12345, type: 3}
 --- !u!1 &1000000000000001
 GameObject:
   m_ObjectHideFlags: 0

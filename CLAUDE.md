@@ -145,6 +145,14 @@ This project follows a **Sacred Process** that MUST be followed without deviatio
 - PRs must reference the issue with "Closes #X"
 - Issues are only closed when the PR is merged
 
+#### Rule 7: Agent Command Restrictions
+When spawning sub-agents (Developer, Reviewer, QA, etc.):
+- **Do NOT use `cd` commands** - always use absolute paths or `-C` flag with git
+- **Do NOT use custom scripts** (e.g., `python script.py`) that require user approval
+- **Do NOT use interactive commands** that wait for user input
+- Only use pre-approved commands and standard tools (git, gh, file read/write/edit) or commands with one-off approval
+- Agents should work within the sandbox restrictions without triggering approval prompts
+
 ### Violation Consequences
 
 Violating these rules undermines the quality assurance process and will result in:
