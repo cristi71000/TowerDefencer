@@ -32,5 +32,10 @@ namespace TowerDefense.Core
         /// Current movement speed (for Fastest priority).
         /// </summary>
         float CurrentSpeed { get; }
+
+        /// <summary>
+        /// Current velocity vector for lead prediction.
+        /// </summary>
+        Vector3 Velocity { get; }
     }
 }

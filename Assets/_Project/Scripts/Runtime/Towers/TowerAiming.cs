@@ -55,12 +55,31 @@ namespace TowerDefense.Towers
 
         private void Start()
         {
-            _turretPivot = _tower.GetTurretPivot();
+            if (_tower != null)
+            {
+                _turretPivot = _tower.GetTurretPivot();
+            }
         }
 
         private void Update()
         {
-            if (_turretPivot == null || _tower.Data == null)
+            // Ensure we have a valid turret pivot; attempt to re-fetch if not set yet
+            if (_turretPivot == null)
+            {
+                if (_tower != null)
+                {
+                    _turretPivot = _tower.GetTurretPivot();
+                }
+
+                if (_turretPivot == null)
+                {
+                    _isAimed = false;
+                    return;
+                }
+            }
+
+            // Ensure the tower data is available before proceeding
+            if (_tower == null || _tower.Data == null)
             {
                 _isAimed = false;
                 return;
@@ -148,27 +167,12 @@ namespace TowerDefense.Towers
         }
 
         /// <summary>
-        /// Gets the velocity of the target (approximated from NavMeshAgent or transform).
+        /// Gets the velocity of the target from the ITargetable interface.
         /// </summary>
         private Vector3 GetTargetVelocity(ITargetable target)
         {
-            // Try to get velocity from NavMeshAgent if available
-            if (target.TargetPoint != null)
-            {
-                var agent = target.TargetPoint.GetComponent<UnityEngine.AI.NavMeshAgent>();
-                if (agent != null && agent.enabled && agent.hasPath)
-                {
-                    return agent.velocity;
-                }
-            }
-
-            // Fallback: use CurrentSpeed in the target's forward direction
-            if (target.TargetPoint != null && target.CurrentSpeed > 0)
-            {
-                return target.TargetPoint.forward * target.CurrentSpeed;
-            }
-
-            return Vector3.zero;
+            // Use the Velocity property from ITargetable (avoids GetComponent calls)
+            return target.Velocity;
         }
 
         /// <summary>
@@ -256,8 +260,8 @@ namespace TowerDefense.Towers
                 Gizmos.DrawWireSphere(firePoint.position, 0.15f);
             }
 
-            // Draw predicted position
-            if (_predictedPosition != Vector3.zero && targeting.CurrentTarget != null)
+            // Draw predicted position (only when there's a valid target)
+            if (targeting.CurrentTarget != null)
             {
                 Gizmos.color = Color.cyan;
                 Gizmos.DrawWireSphere(_predictedPosition, 0.3f);

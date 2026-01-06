@@ -12,7 +12,7 @@ namespace TowerDefense.Towers
     public class TowerTargeting : MonoBehaviour
     {
         private const int MaxTargetBuffer = 32;
-        private static readonly Collider[] _hitBuffer = new Collider[MaxTargetBuffer];
+        private readonly Collider[] _hitBuffer = new Collider[MaxTargetBuffer];
 
         [Header("Targeting Configuration")]
         [SerializeField] private LayerMask _enemyLayerMask = 1 << 8; // Layer 8 = Enemy
@@ -71,12 +71,15 @@ namespace TowerDefense.Towers
 
         /// <summary>
         /// Gets all valid targets currently in range.
+        /// This method refreshes the internal target list and may affect the tower's targeting
+        /// state if called between regular Update cycles.
         /// </summary>
-        /// <returns>Read-only list of valid targets.</returns>
+        /// <returns>A snapshot copy of valid targets.</returns>
         public IReadOnlyList<ITargetable> GetTargetsInRange()
         {
             GatherValidTargets();
-            return _validTargets;
+            // Return a defensive copy so external callers cannot mutate the internal list
+            return new List<ITargetable>(_validTargets);
         }
 
         private void UpdateTarget()
@@ -144,12 +147,20 @@ namespace TowerDefense.Towers
                 _enemyLayerMask
             );
 
+            if (hitCount == MaxTargetBuffer)
+            {
+                Debug.LogWarning(
+                    $"[TowerTargeting] Target buffer may be too small for tower '{name}'. " +
+                    $"OverlapSphereNonAlloc returned {hitCount} results, which equals MaxTargetBuffer ({MaxTargetBuffer}). " +
+                    "Some enemies in range may not be considered as targets."
+                );
+            }
+
             for (int i = 0; i < hitCount; i++)
             {
                 // Try to get ITargetable from the collider's GameObject
-                ITargetable targetable = _hitBuffer[i].GetComponent<ITargetable>();
-
-                if (targetable != null && targetable.IsValidTarget)
+                if (_hitBuffer[i].TryGetComponent<ITargetable>(out var targetable) &&
+                    targetable.IsValidTarget)
                 {
                     _validTargets.Add(targetable);
                 }

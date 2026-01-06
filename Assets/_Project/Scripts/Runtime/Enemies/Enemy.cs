@@ -69,6 +69,21 @@ namespace TowerDefense.Enemies
             }
         }
 
+        /// <summary>
+        /// Current velocity vector for lead prediction.
+        /// </summary>
+        public Vector3 Velocity
+        {
+            get
+            {
+                if (_navMeshAgent != null && _navMeshAgent.enabled && _navMeshAgent.hasPath)
+                {
+                    return _navMeshAgent.velocity;
+                }
+                return Vector3.zero;
+            }
+        }
+
         #endregion
 
         public event System.Action<Enemy> OnDeath;
@@ -88,7 +103,8 @@ namespace TowerDefense.Enemies
         private void Update()
         {
             // Track distance traveled for "First" targeting priority
-            if (!_isDead && !_hasReachedEnd)
+            // Only accumulate distance when the enemy is actually moving to avoid unnecessary calculations
+            if (!_isDead && !_hasReachedEnd && CurrentSpeed > 0.01f)
             {
                 float frameDistance = Vector3.Distance(transform.position, _lastPosition);
                 _distanceTraveled += frameDistance;
