@@ -7,6 +7,7 @@ namespace TowerDefense.Towers
 {
     /// <summary>
     /// Projectile component that handles movement, collision, and damage dealing.
+    /// Tracks the target's current position (no lead prediction).
     /// Supports both single-target and AOE damage modes.
     /// Designed for use with object pooling.
     /// </summary>
@@ -14,6 +15,10 @@ namespace TowerDefense.Towers
     [RequireComponent(typeof(Collider))]
     public class Projectile : MonoBehaviour
     {
+        private const int MaxAOETargets = 32;
+        private static readonly Collider[] _aoeHitBuffer = new Collider[MaxAOETargets];
+        private static int _enemyLayer = -1;
+
         [Header("Settings")]
         [SerializeField] private float _defaultSpeed = 15f;
         [SerializeField] private float _defaultLifetime = 5f;
@@ -71,6 +76,12 @@ namespace TowerDefense.Towers
             {
                 _rigidbody.isKinematic = true;
                 _rigidbody.useGravity = false;
+            }
+
+            // Cache enemy layer (Layer 8) - only lookup once
+            if (_enemyLayer < 0)
+            {
+                _enemyLayer = LayerMask.NameToLayer("Enemy");
             }
         }
 
@@ -184,8 +195,8 @@ namespace TowerDefense.Towers
         {
             if (!_isActive) return;
 
-            // Only collide with enemies (Layer 8)
-            if (other.gameObject.layer != 8) return;
+            // Only collide with enemies
+            if (other.gameObject.layer != _enemyLayer) return;
 
             // Get the enemy component
             Enemy enemy = other.GetComponentInParent<Enemy>();
@@ -218,18 +229,17 @@ namespace TowerDefense.Towers
 
         private void ApplyAOEDamage()
         {
-            // Use non-alloc to avoid garbage allocation
-            Collider[] hits = new Collider[32];
+            // Use static buffer to avoid garbage allocation
             int hitCount = Physics.OverlapSphereNonAlloc(
                 transform.position,
                 _aoeRadius,
-                hits,
-                1 << 8 // Enemy layer mask
+                _aoeHitBuffer,
+                1 << _enemyLayer
             );
 
             for (int i = 0; i < hitCount; i++)
             {
-                Enemy enemy = hits[i].GetComponentInParent<Enemy>();
+                Enemy enemy = _aoeHitBuffer[i].GetComponentInParent<Enemy>();
                 if (enemy != null && !enemy.IsDead)
                 {
                     enemy.TakeDamage(_damage);
