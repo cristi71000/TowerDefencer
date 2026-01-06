@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 23000000000000000}
   - component: {fileID: 135000000000000000}
   - component: {fileID: 54000000000000000}
+  - component: {fileID: 114000000000000000}
   m_Layer: 9
   m_Name: Projectile_Basic
   m_TagString: Untagged
@@ -104,7 +105,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
+  m_Radius: 0.15
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &54000000000000000
 Rigidbody:
@@ -133,3 +134,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &114000000000000000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000000000000000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3d4e5f60718293a4b5c6d7e8f901234, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  _defaultSpeed: 15
+  _defaultLifetime: 5
+  _trackTarget: 1
+  _rotationSpeed: 720
+  _impactVFXPrefab: {fileID: 1000000000000000, guid: f1e2d3c4b5a697081920a1b2c3d4e5f1, type: 3}
+  _impactSound: {fileID: 0}
