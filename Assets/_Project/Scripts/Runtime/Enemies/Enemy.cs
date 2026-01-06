@@ -1,10 +1,11 @@
 using UnityEngine;
 using UnityEngine.AI;
+using TowerDefense.Core;
 
 namespace TowerDefense.Enemies
 {
     [RequireComponent(typeof(CapsuleCollider))]
-    public class Enemy : MonoBehaviour
+    public class Enemy : MonoBehaviour, ITargetable
     {
         [Header("Data")]
         [SerializeField] private EnemyData _enemyData;
@@ -13,20 +14,62 @@ namespace TowerDefense.Enemies
         [SerializeField] private Transform _healthBarAnchor;
         [SerializeField] private GameObject _healthBarPrefab;
         [SerializeField] private EnemyDeathEffect _deathEffect;
+        [SerializeField] private Transform _targetPoint;
 
         private NavMeshAgent _navMeshAgent;
         private EnemyHealthBar _healthBar;
         private float _currentHealth;
         private bool _isDead;
         private bool _hasReachedEnd;
+        private float _distanceTraveled;
+        private Vector3 _lastPosition;
 
         public EnemyData Data => _enemyData;
-        public float CurrentHealth => _currentHealth;
+        public float CurrentHealthFloat => _currentHealth;
         public float MaxHealth => _enemyData != null ? _enemyData.MaxHealth : 0f;
         public float HealthPercent => MaxHealth > 0 ? _currentHealth / MaxHealth : 0f;
         public bool IsDead => _isDead;
         public bool HasReachedEnd => _hasReachedEnd;
         public Transform HealthBarAnchor => _healthBarAnchor;
+
+        #region ITargetable Implementation
+
+        /// <summary>
+        /// The transform point to aim at. Falls back to this transform if not set.
+        /// </summary>
+        public Transform TargetPoint => _targetPoint != null ? _targetPoint : transform;
+
+        /// <summary>
+        /// Whether this enemy is a valid target (alive and not at end).
+        /// </summary>
+        public bool IsValidTarget => !_isDead && !_hasReachedEnd;
+
+        /// <summary>
+        /// Current health as integer for targeting priority calculations.
+        /// </summary>
+        int ITargetable.CurrentHealth => Mathf.RoundToInt(_currentHealth);
+
+        /// <summary>
+        /// Distance traveled along the path (for First priority targeting).
+        /// </summary>
+        public float DistanceTraveled => _distanceTraveled;
+
+        /// <summary>
+        /// Current movement speed from NavMeshAgent velocity.
+        /// </summary>
+        public float CurrentSpeed
+        {
+            get
+            {
+                if (_navMeshAgent != null && _navMeshAgent.enabled && _navMeshAgent.hasPath)
+                {
+                    return _navMeshAgent.velocity.magnitude;
+                }
+                return 0f;
+            }
+        }
+
+        #endregion
 
         public event System.Action<Enemy> OnDeath;
         public event System.Action<Enemy> OnReachedEnd;
@@ -35,6 +78,22 @@ namespace TowerDefense.Enemies
         private void Awake()
         {
             _navMeshAgent = GetComponent<NavMeshAgent>();
+        }
+
+        private void Start()
+        {
+            _lastPosition = transform.position;
+        }
+
+        private void Update()
+        {
+            // Track distance traveled for "First" targeting priority
+            if (!_isDead && !_hasReachedEnd)
+            {
+                float frameDistance = Vector3.Distance(transform.position, _lastPosition);
+                _distanceTraveled += frameDistance;
+                _lastPosition = transform.position;
+            }
         }
 
         public void Initialize(EnemyData data)
@@ -49,6 +108,8 @@ namespace TowerDefense.Enemies
             _currentHealth = data.MaxHealth;
             _isDead = false;
             _hasReachedEnd = false;
+            _distanceTraveled = 0f;
+            _lastPosition = transform.position;
 
             if (_navMeshAgent != null)
             {
@@ -74,6 +135,7 @@ namespace TowerDefense.Enemies
             _isDead = false;
             _hasReachedEnd = false;
             _enemyData = null;
+            _distanceTraveled = 0f;
 
             // Clear event subscribers to prevent stale references
             OnDeath = null;
@@ -228,6 +290,11 @@ namespace TowerDefense.Enemies
                 Gizmos.color = Color.green;
                 Gizmos.DrawWireSphere(_healthBarAnchor.position, 0.1f);
             }
+
+            // Draw target point
+            Transform tp = _targetPoint != null ? _targetPoint : transform;
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(tp.position, 0.15f);
         }
     }
 }
