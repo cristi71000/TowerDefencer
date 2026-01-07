@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="37" result="Passed" total="37" passed="37" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-01-07 14:34:05Z" end-time="2026-01-07 14:34:05Z" duration="0.0833407">
+  <test-suite type="TestSuite" id="1000" name="TowerDefencer_Unity" fullname="TowerDefencer_Unity" runstate="Runnable" testcasecount="37" result="Passed" start-time="2026-01-07 14:34:05Z" end-time="2026-01-07 14:34:05Z" duration="0.083341" total="37" passed="37" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="1040" name="TowerDefense.Tests.EditMode.dll" fullname="E:/Work/Games/AIGames/TowerDefencer/Library/ScriptAssemblies/TowerDefense.Tests.EditMode.dll" runstate="Runnable" testcasecount="37" result="Passed" start-time="2026-01-07 14:34:05Z" end-time="2026-01-07 14:34:05Z" duration="0.077614" total="37" passed="37" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="394944" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="1041" name="TowerDefense" fullname="TowerDefense" runstate="Runnable" testcasecount="37" result="Passed" start-time="2026-01-07 14:34:05Z" end-time="2026-01-07 14:34:05Z" duration="0.076692" total="37" passed="37" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1042" name="Tests" fullname="TowerDefense.Tests" runstate="Runnable" testcasecount="37" result="Passed" start-time="2026-01-07 14:34:05Z" end-time="2026-01-07 14:34:05Z" duration="0.076021" total="37" passed="37" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestSuite" id="1043" name="EditMode" fullname="TowerDefense.Tests.EditMode" runstate="Runnable" testcasecount="37" result="Passed" start-time="2026-01-07 14:34:05Z" end-time="2026-01-07 14:34:05Z" duration="0.075295" total="37" passed="37" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="TestFixture" id="1001" name="DamageSystemTests" fullname="TowerDefense.Tests.EditMode.DamageSystemTests" classname="TowerDefense.Tests.EditMode.DamageSystemTests" runstate="Runnable" testcasecount="18" result="Passed" start-time="2026-01-07 14:34:05Z" end-time="2026-01-07 14:34:05Z" duration="0.053432" total="18" passed="18" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1019" name="DamageInfo_Constructor_AllParameters" fullname="TowerDefense.Tests.EditMode.DamageSystemTests.DamageInfo_Constructor_AllParameters" methodname="DamageInfo_Constructor_AllParameters" classname="TowerDefense.Tests.EditMode.DamageSystemTests" runstate="Runnable" seed="1064705722" result="Passed" start-time="2026-01-07 14:34:05Z" end-time="2026-01-07 14:34:05Z" duration="0.024743" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1017" name="DamageInfo_Create_SimpleVersion" fullname="TowerDefense.Tests.EditMode.DamageSystemTests.DamageInfo_Create_SimpleVersion" methodname="DamageInfo_Create_SimpleVersion" classname="TowerDefense.Tests.EditMode.DamageSystemTests" runstate="Runnable" seed="338196198" result="Passed" start-time="2026-01-07 14:34:05Z" end-time="2026-01-07 14:34:05Z" duration="0.000866" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1018" name="DamageInfo_Create_WithPosition" fullname="TowerDefense.Tests.EditMode.DamageSystemTests.DamageInfo_Create_WithPosition" methodname="DamageInfo_Create_WithPosition" classname="TowerDefense.Tests.EditMode.DamageSystemTests" runstate="Runnable" seed="455191194" result="Passed" start-time="2026-01-07 14:34:05Z" end-time="2026-01-07 14:34:05Z" duration="0.000475" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1003" name="TC1_ArmorReduction_MinimumDamageIs1" fullname="TowerDefense.Tests.EditMode.DamageSystemTests.TC1_ArmorReduction_MinimumDamageIs1" methodname="TC1_ArmorReduction_MinimumDamageIs1" classname="TowerDefense.Tests.EditMode.DamageSystemTests" runstate="Runnable" seed="1463729867" result="Passed" start-time="2026-01-07 14:34:05Z" end-time="2026-01-07 14:34:05Z" duration="0.001053" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1002" name="TC1_ArmorReduction_ReducesDamageCorrectly" fullname="TowerDefense.Tests.EditMode.DamageSystemTests.TC1_ArmorReduction_ReducesDamageCorrectly" methodname="TC1_ArmorReduction_ReducesDamageCorrectly" classname="TowerDefense.Tests.EditMode.DamageSystemTests" runstate="Runnable" seed="2130674107" result="Passed" start-time="2026-01-07 14:34:05Z" end-time="2026-01-07 14:34:05Z" duration="0.000214" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1004" name="TC1_ArmorReduction_ZeroArmorNoReduction" fullname="TowerDefense.Tests.EditMode.DamageSystemTests.TC1_ArmorReduction_ZeroArmorNoReduction" methodname="TC1_ArmorReduction_ZeroArmorNoReduction" classname="TowerDefense.Tests.EditMode.DamageSystemTests" runstate="Runnable" seed="819162444" result="Passed" start-time="2026-01-07 14:34:05Z" end-time="2026-01-07 14:34:05Z" duration="0.000183" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1007" name="TC2_MagicDamage_AppliesArmor" fullname="TowerDefense.Tests.EditMode.DamageSystemTests.TC2_MagicDamage_AppliesArmor" methodname="TC2_MagicDamage_AppliesArmor" classname="TowerDefense.Tests.EditMode.DamageSystemTests" runstate="Runnable" seed="226220308" result="Passed" start-time="2026-01-07 14:34:05Z" end-time="2026-01-07 14:34:05Z" duration="0.000235" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1006" name="TC2_PhysicalDamage_AppliesArmor" fullname="TowerDefense.Tests.EditMode.DamageSystemTests.TC2_PhysicalDamage_AppliesArmor" methodname="TC2_PhysicalDamage_AppliesArmor" classname="TowerDefense.Tests.EditMode.DamageSystemTests" runstate="Runnable" seed="2097964732" result="Passed" start-time="2026-01-07 14:34:05Z" end-time="2026-01-07 14:34:05Z" duration="0.000154" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1005" name="TC2_TrueDamage_IgnoresArmor" fullname="TowerDefense.Tests.EditMode.DamageSystemTests.TC2_TrueDamage_IgnoresArmor" methodname="TC2_TrueDamage_IgnoresArmor" classname="TowerDefense.Tests.EditMode.DamageSystemTests" runstate="Runnable" seed="604946145" result="Passed" start-time="2026-01-07 14:34:05Z" end-time="2026-01-07 14:34:05Z" duration="0.000146" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1008" name="TC3_DamageMultiplier_AppliesCorrectly" fullname="TowerDefense.Tests.EditMode.DamageSystemTests.TC3_DamageMultiplier_AppliesCorrectly" methodname="TC3_DamageMultiplier_AppliesCorrectly" classname="TowerDefense.Tests.EditMode.DamageSystemTests" runstate="Runnable" seed="76738330" result="Passed" start-time="2026-01-07 14:34:05Z" end-time="2026-01-07 14:34:05Z" duration="0.000170" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1009" name="TC3_DamageMultiplier_WithArmor" fullname="TowerDefense.Tests.EditMode.DamageSystemTests.TC3_DamageMultiplier_WithArmor" methodname="TC3_DamageMultiplier_WithArmor" classname="TowerDefense.Tests.EditMode.DamageSystemTests" runstate="Runnable" seed="633578095" result="Passed" start-time="2026-01-07 14:34:05Z" end-time="2026-01-07 14:34:05Z" duration="0.000162" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1015" name="TC4_CalculateDamageWithCrit_Critical" fullname="TowerDefense.Tests.EditMode.DamageSystemTests.TC4_CalculateDamageWithCrit_Critical" methodname="TC4_CalculateDamageWithCrit_Critical" classname="TowerDefense.Tests.EditMode.DamageSystemTests" runstate="Runnable" seed="2143043960" result="Passed" start-time="2026-01-07 14:34:05Z" end-time="2026-01-07 14:34:05Z" duration="0.000464" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1014" name="TC4_CalculateDamageWithCrit_NonCritical" fullname="TowerDefense.Tests.EditMode.DamageSystemTests.TC4_CalculateDamageWithCrit_NonCritical" methodname="TC4_CalculateDamageWithCrit_NonCritical" classname="TowerDefense.Tests.EditMode.DamageSystemTests" runstate="Runnable" seed="1025032599" result="Passed" start-time="2026-01-07 14:34:05Z" end-time="2026-01-07 14:34:05Z" duration="0.000200" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1016" name="TC4_CalculateDamageWithCrit_TrueDamageCritical" fullname="TowerDefense.Tests.EditMode.DamageSystemTests.TC4_CalculateDamageWithCrit_TrueDamageCritical" methodname="TC4_CalculateDamageWithCrit_TrueDamageCritical" classname="TowerDefense.Tests.EditMode.DamageSystemTests" runstate="Runnable" seed="1990206583" result="Passed" start-time="2026-01-07 14:34:05Z" end-time="2026-01-07 14:34:05Z" duration="0.000169" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1011" name="TC4_CriticalDamage_CustomMultiplier" fullname="TowerDefense.Tests.EditMode.DamageSystemTests.TC4_CriticalDamage_CustomMultiplier" methodname="TC4_CriticalDamage_CustomMultiplier" classname="TowerDefense.Tests.EditMode.DamageSystemTests" runstate="Runnable" seed="984810238" result="Passed" start-time="2026-01-07 14:34:05Z" end-time="2026-01-07 14:34:05Z" duration="0.000157" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1010" name="TC4_CriticalDamage_DoublesBaseDamage" fullname="TowerDefense.Tests.EditMode.DamageSystemTests.TC4_CriticalDamage_DoublesBaseDamage" methodname="TC4_CriticalDamage_DoublesBaseDamage" classname="TowerDefense.Tests.EditMode.DamageSystemTests" runstate="Runnable" seed="2128817533" result="Passed" start-time="2026-01-07 14:34:05Z" end-time="2026-01-07 14:34:05Z" duration="0.000137" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1012" name="TC4_CriticalRoll_100PercentChance" fullname="TowerDefense.Tests.EditMode.DamageSystemTests.TC4_CriticalRoll_100PercentChance" methodname="TC4_CriticalRoll_100PercentChance" classname="TowerDefense.Tests.EditMode.DamageSystemTests" runstate="Runnable" seed="188594646" result="Passed" start-time="2026-01-07 14:34:05Z" end-time="2026-01-07 14:34:05Z" duration="0.000138" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1013" name="TC4_CriticalRoll_ZeroPercentChance" fullname="TowerDefense.Tests.EditMode.DamageSystemTests.TC4_CriticalRoll_ZeroPercentChance" methodname="TC4_CriticalRoll_ZeroPercentChance" classname="TowerDefense.Tests.EditMode.DamageSystemTests" runstate="Runnable" seed="1551661407" result="Passed" start-time="2026-01-07 14:34:05Z" end-time="2026-01-07 14:34:05Z" duration="0.000132" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="TestFixture" id="1020" name="GameManagerTests" fullname="TowerDefense.Tests.EditMode.GameManagerTests" classname="TowerDefense.Tests.EditMode.GameManagerTests" runstate="Runnable" testcasecount="19" result="Passed" start-time="2026-01-07 14:34:05Z" end-time="2026-01-07 14:34:05Z" duration="0.019590" total="19" passed="19" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1035" name="AdvanceWave_IncrementsWaveNumber" fullname="TowerDefense.Tests.EditMode.GameManagerTests.AdvanceWave_IncrementsWaveNumber" methodname="AdvanceWave_IncrementsWaveNumber" classname="TowerDefense.Tests.EditMode.GameManagerTests" runstate="Runnable" seed="1114205551" result="Passed" start-time="2026-01-07 14:34:05Z" end-time="2026-01-07 14:34:05Z" duration="0.004209" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1030" name="ModifyCurrency_AddingCurrency_IncreasesCorrectly" fullname="TowerDefense.Tests.EditMode.GameManagerTests.ModifyCurrency_AddingCurrency_IncreasesCorrectly" methodname="ModifyCurrency_AddingCurrency_IncreasesCorrectly" classname="TowerDefense.Tests.EditMode.GameManagerTests" runstate="Runnable" seed="1622208948" result="Passed" start-time="2026-01-07 14:34:05Z" end-time="2026-01-07 14:34:05Z" duration="0.000479" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1032" name="ModifyCurrency_ClampsToZero" fullname="TowerDefense.Tests.EditMode.GameManagerTests.ModifyCurrency_ClampsToZero" methodname="ModifyCurrency_ClampsToZero" classname="TowerDefense.Tests.EditMode.GameManagerTests" runstate="Runnable" seed="407281372" result="Passed" start-time="2026-01-07 14:34:05Z" end-time="2026-01-07 14:34:05Z" duration="0.000341" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1031" name="ModifyCurrency_RemovingCurrency_DecreasesCorrectly" fullname="TowerDefense.Tests.EditMode.GameManagerTests.ModifyCurrency_RemovingCurrency_DecreasesCorrectly" methodname="ModifyCurrency_RemovingCurrency_DecreasesCorrectly" classname="TowerDefense.Tests.EditMode.GameManagerTests" runstate="Runnable" seed="1865946781" result="Passed" start-time="2026-01-07 14:34:05Z" end-time="2026-01-07 14:34:05Z" duration="0.000330" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1029" name="ModifyLives_AddingLives_IncreasesCorrectly" fullname="TowerDefense.Tests.EditMode.GameManagerTests.ModifyLives_AddingLives_IncreasesCorrectly" methodname="ModifyLives_AddingLives_IncreasesCorrectly" classname="TowerDefense.Tests.EditMode.GameManagerTests" runstate="Runnable" seed="1981170150" result="Passed" start-time="2026-01-07 14:34:05Z" end-time="2026-01-07 14:34:05Z" duration="0.000472" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1027" name="ModifyLives_WhenLivesGoBelowZero_ClampsToZeroAndTriggersDefeat" fullname="TowerDefense.Tests.EditMode.GameManagerTests.ModifyLives_WhenLivesGoBelowZero_ClampsToZeroAndTriggersDefeat" methodname="ModifyLives_WhenLivesGoBelowZero_ClampsToZeroAndTriggersDefeat" classname="TowerDefense.Tests.EditMode.GameManagerTests" runstate="Runnable" seed="181947551" result="Passed" start-time="2026-01-07 14:34:05Z" end-time="2026-01-07 14:34:05Z" duration="0.000487" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1026" name="ModifyLives_WhenLivesReachZero_TriggersDefeat" fullname="TowerDefense.Tests.EditMode.GameManagerTests.ModifyLives_WhenLivesReachZero_TriggersDefeat" methodname="ModifyLives_WhenLivesReachZero_TriggersDefeat" classname="TowerDefense.Tests.EditMode.GameManagerTests" runstate="Runnable" seed="1260030668" result="Passed" start-time="2026-01-07 14:34:05Z" end-time="2026-01-07 14:34:05Z" duration="0.000382" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1028" name="ModifyLives_WhenLivesRemainPositive_DoesNotTriggerDefeat" fullname="TowerDefense.Tests.EditMode.GameManagerTests.ModifyLives_WhenLivesRemainPositive_DoesNotTriggerDefeat" methodname="ModifyLives_WhenLivesRemainPositive_DoesNotTriggerDefeat" classname="TowerDefense.Tests.EditMode.GameManagerTests" runstate="Runnable" seed="1721886688" result="Passed" start-time="2026-01-07 14:34:05Z" end-time="2026-01-07 14:34:05Z" duration="0.000364" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1037" name="OnCurrencyChanged_FiresWhenCurrencyModified" fullname="TowerDefense.Tests.EditMode.GameManagerTests.OnCurrencyChanged_FiresWhenCurrencyModified" methodname="OnCurrencyChanged_FiresWhenCurrencyModified" classname="TowerDefense.Tests.EditMode.GameManagerTests" runstate="Runnable" seed="1862171087" result="Passed" start-time="2026-01-07 14:34:05Z" end-time="2026-01-07 14:34:05Z" duration="0.000508" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1039" name="OnGameStateChanged_FiresWhenStateChanges" fullname="TowerDefense.Tests.EditMode.GameManagerTests.OnGameStateChanged_FiresWhenStateChanges" methodname="OnGameStateChanged_FiresWhenStateChanges" classname="TowerDefense.Tests.EditMode.GameManagerTests" runstate="Runnable" seed="1113031199" result="Passed" start-time="2026-01-07 14:34:05Z" end-time="2026-01-07 14:34:05Z" duration="0.000525" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1036" name="OnLivesChanged_FiresWhenLivesModified" fullname="TowerDefense.Tests.EditMode.GameManagerTests.OnLivesChanged_FiresWhenLivesModified" methodname="OnLivesChanged_FiresWhenLivesModified" classname="TowerDefense.Tests.EditMode.GameManagerTests" runstate="Runnable" seed="211044554" result="Passed" start-time="2026-01-07 14:34:05Z" end-time="2026-01-07 14:34:05Z" duration="0.000577" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1038" name="OnWaveChanged_FiresWhenWaveAdvanced" fullname="TowerDefense.Tests.EditMode.GameManagerTests.OnWaveChanged_FiresWhenWaveAdvanced" methodname="OnWaveChanged_FiresWhenWaveAdvanced" classname="TowerDefense.Tests.EditMode.GameManagerTests" runstate="Runnable" seed="431955997" result="Passed" start-time="2026-01-07 14:34:05Z" end-time="2026-01-07 14:34:05Z" duration="0.000537" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1033" name="SetGameState_ChangesState" fullname="TowerDefense.Tests.EditMode.GameManagerTests.SetGameState_ChangesState" methodname="SetGameState_ChangesState" classname="TowerDefense.Tests.EditMode.GameManagerTests" runstate="Runnable" seed="283966577" result="Passed" start-time="2026-01-07 14:34:05Z" end-time="2026-01-07 14:34:05Z" duration="0.000357" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1034" name="SetGameState_SameState_DoesNothing" fullname="TowerDefense.Tests.EditMode.GameManagerTests.SetGameState_SameState_DoesNothing" methodname="SetGameState_SameState_DoesNothing" classname="TowerDefense.Tests.EditMode.GameManagerTests" runstate="Runnable" seed="1637662170" result="Passed" start-time="2026-01-07 14:34:05Z" end-time="2026-01-07 14:34:05Z" duration="0.000438" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1022" name="TrySpendCurrency_WithExactFunds_ReturnsTrue" fullname="TowerDefense.Tests.EditMode.GameManagerTests.TrySpendCurrency_WithExactFunds_ReturnsTrue" methodname="TrySpendCurrency_WithExactFunds_ReturnsTrue" classname="TowerDefense.Tests.EditMode.GameManagerTests" runstate="Runnable" seed="481893749" result="Passed" start-time="2026-01-07 14:34:05Z" end-time="2026-01-07 14:34:05Z" duration="0.000518" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1023" name="TrySpendCurrency_WithInsufficientFunds_ReturnsFalse" fullname="TowerDefense.Tests.EditMode.GameManagerTests.TrySpendCurrency_WithInsufficientFunds_ReturnsFalse" methodname="TrySpendCurrency_WithInsufficientFunds_ReturnsFalse" classname="TowerDefense.Tests.EditMode.GameManagerTests" runstate="Runnable" seed="443360974" result="Passed" start-time="2026-01-07 14:34:05Z" end-time="2026-01-07 14:34:05Z" duration="0.000392" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1025" name="TrySpendCurrency_WithNegativeAmount_ReturnsFalse" fullname="TowerDefense.Tests.EditMode.GameManagerTests.TrySpendCurrency_WithNegativeAmount_ReturnsFalse" methodname="TrySpendCurrency_WithNegativeAmount_ReturnsFalse" classname="TowerDefense.Tests.EditMode.GameManagerTests" runstate="Runnable" seed="1357794703" result="Passed" start-time="2026-01-07 14:34:05Z" end-time="2026-01-07 14:34:05Z" duration="0.002604" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[TrySpendCurrency called with negative amount. Use ModifyCurrency to add currency.
+]]></output>
+              </test-case>
+              <test-case id="1021" name="TrySpendCurrency_WithSufficientFunds_ReturnsTrue" fullname="TowerDefense.Tests.EditMode.GameManagerTests.TrySpendCurrency_WithSufficientFunds_ReturnsTrue" methodname="TrySpendCurrency_WithSufficientFunds_ReturnsTrue" classname="TowerDefense.Tests.EditMode.GameManagerTests" runstate="Runnable" seed="1853086491" result="Passed" start-time="2026-01-07 14:34:05Z" end-time="2026-01-07 14:34:05Z" duration="0.000478" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1024" name="TrySpendCurrency_WithZeroFunds_ReturnsFalse" fullname="TowerDefense.Tests.EditMode.GameManagerTests.TrySpendCurrency_WithZeroFunds_ReturnsFalse" methodname="TrySpendCurrency_WithZeroFunds_ReturnsFalse" classname="TowerDefense.Tests.EditMode.GameManagerTests" runstate="Runnable" seed="1648086956" result="Passed" start-time="2026-01-07 14:34:05Z" end-time="2026-01-07 14:34:05Z" duration="0.000385" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Saving results to: C:/Users/crist/AppData/LocalLow/DefaultCompany/TowerDefencer_Unity\TestResults.xml
+]]></output>
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

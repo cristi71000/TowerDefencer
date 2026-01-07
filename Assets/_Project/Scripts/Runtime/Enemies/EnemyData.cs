@@ -31,6 +31,9 @@ namespace TowerDefense.Enemies
         public float MoveSpeed = 3f;
         [Min(0)]
         public int Damage = 1;
+        [Min(0)]
+        [Tooltip("Armor reduces incoming damage (except True damage). Damage is reduced by armor value, minimum 1.")]
+        public float Armor = 0f;
 
         [Header("Economy")]
         [Min(0)]
