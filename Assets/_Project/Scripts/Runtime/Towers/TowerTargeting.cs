@@ -149,7 +149,7 @@ namespace TowerDefense.Towers
 
             if (hitCount == MaxTargetBuffer)
             {
-                Debug.LogWarning(
+                UnityEngine.Debug.LogWarning(
                     $"[TowerTargeting] Target buffer may be too small for tower '{name}'. " +
                     $"OverlapSphereNonAlloc returned {hitCount} results, which equals MaxTargetBuffer ({MaxTargetBuffer}). " +
                     "Some enemies in range may not be considered as targets."

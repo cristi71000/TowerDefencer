@@ -56,7 +56,7 @@ namespace TowerDefense.Towers
         {
             if (Instance != null && Instance != this)
             {
-                Debug.LogWarning($"Multiple ProjectilePoolManager instances detected. Destroying duplicate on {gameObject.name}.");
+                UnityEngine.Debug.LogWarning($"Multiple ProjectilePoolManager instances detected. Destroying duplicate on {gameObject.name}.");
                 Destroy(gameObject);
                 return;
             }
@@ -95,7 +95,7 @@ namespace TowerDefense.Towers
         {
             if (prefab == null)
             {
-                Debug.LogError("ProjectilePoolManager.GetProjectile called with null prefab.");
+                UnityEngine.Debug.LogError("ProjectilePoolManager.GetProjectile called with null prefab.");
                 return null;
             }
 
@@ -142,13 +142,13 @@ namespace TowerDefense.Towers
         {
             if (projectile == null)
             {
-                Debug.LogWarning("ProjectilePoolManager.ReturnProjectile called with null projectile.");
+                UnityEngine.Debug.LogWarning("ProjectilePoolManager.ReturnProjectile called with null projectile.");
                 return;
             }
 
             if (prefab == null)
             {
-                Debug.LogWarning($"Projectile '{projectile.name}' has no prefab reference. Destroying instead.");
+                UnityEngine.Debug.LogWarning($"Projectile '{projectile.name}' has no prefab reference. Destroying instead.");
                 Destroy(projectile.gameObject);
                 return;
             }
@@ -159,7 +159,7 @@ namespace TowerDefense.Towers
             }
             else
             {
-                Debug.LogWarning($"No pool found for prefab '{prefab.name}'. Destroying projectile instead.");
+                UnityEngine.Debug.LogWarning($"No pool found for prefab '{prefab.name}'. Destroying projectile instead.");
                 Destroy(projectile.gameObject);
             }
         }
@@ -184,14 +184,14 @@ namespace TowerDefense.Towers
         {
             if (prefab == null)
             {
-                Debug.LogWarning("Cannot prewarm pool with null prefab.");
+                UnityEngine.Debug.LogWarning("Cannot prewarm pool with null prefab.");
                 return;
             }
 
             Projectile prefabProjectile = prefab.GetComponent<Projectile>();
             if (prefabProjectile == null)
             {
-                Debug.LogWarning($"Prefab '{prefab.name}' does not have a Projectile component. Cannot prewarm.");
+                UnityEngine.Debug.LogWarning($"Prefab '{prefab.name}' does not have a Projectile component. Cannot prewarm.");
                 return;
             }
 
@@ -246,7 +246,7 @@ namespace TowerDefense.Towers
             Projectile prefabProjectile = prefab.GetComponent<Projectile>();
             if (prefabProjectile == null)
             {
-                Debug.LogError($"Prefab '{prefab.name}' does not have a Projectile component.");
+                UnityEngine.Debug.LogError($"Prefab '{prefab.name}' does not have a Projectile component.");
                 return null;
             }
 

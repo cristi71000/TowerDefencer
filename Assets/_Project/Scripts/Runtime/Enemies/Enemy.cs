@@ -116,7 +116,7 @@ namespace TowerDefense.Enemies
         {
             if (data == null)
             {
-                Debug.LogError($"Enemy.Initialize called with null data on {gameObject.name}");
+                UnityEngine.Debug.LogError($"Enemy.Initialize called with null data on {gameObject.name}");
                 return;
             }
 
@@ -282,7 +282,7 @@ namespace TowerDefense.Enemies
 
             if (_healthBarPrefab == null)
             {
-                Debug.LogWarning($"Health bar prefab not assigned on {gameObject.name}");
+                UnityEngine.Debug.LogWarning($"Health bar prefab not assigned on {gameObject.name}");
                 return;
             }
 
@@ -293,7 +293,7 @@ namespace TowerDefense.Enemies
 
             if (_healthBar == null)
             {
-                Debug.LogError($"Health bar prefab does not have EnemyHealthBar component on {gameObject.name}");
+                UnityEngine.Debug.LogError($"Health bar prefab does not have EnemyHealthBar component on {gameObject.name}");
                 Destroy(healthBarInstance);
             }
         }

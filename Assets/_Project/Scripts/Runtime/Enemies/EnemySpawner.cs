@@ -50,7 +50,7 @@ namespace TowerDefense.Enemies
         {
             if (Instance != null && Instance != this)
             {
-                Debug.LogWarning($"Multiple EnemySpawner instances detected. Destroying duplicate on {gameObject.name}.");
+                UnityEngine.Debug.LogWarning($"Multiple EnemySpawner instances detected. Destroying duplicate on {gameObject.name}.");
                 Destroy(gameObject);
                 return;
             }
@@ -66,7 +66,7 @@ namespace TowerDefense.Enemies
             }
             else
             {
-                Debug.LogError("EnemySpawner: ExitPoint.Instance is null in Start(). Enemy exit detection will not work.");
+                UnityEngine.Debug.LogError("EnemySpawner: ExitPoint.Instance is null in Start(). Enemy exit detection will not work.");
             }
         }
 
@@ -96,19 +96,19 @@ namespace TowerDefense.Enemies
         {
             if (enemyData == null)
             {
-                Debug.LogError("EnemySpawner.SpawnEnemy called with null enemyData.");
+                UnityEngine.Debug.LogError("EnemySpawner.SpawnEnemy called with null enemyData.");
                 return null;
             }
 
             if (SpawnPoint.Instance == null)
             {
-                Debug.LogError("Cannot spawn enemy: SpawnPoint.Instance is null.");
+                UnityEngine.Debug.LogError("Cannot spawn enemy: SpawnPoint.Instance is null.");
                 return null;
             }
 
             if (EnemyPoolManager.Instance == null)
             {
-                Debug.LogError("Cannot spawn enemy: EnemyPoolManager.Instance is null.");
+                UnityEngine.Debug.LogError("Cannot spawn enemy: EnemyPoolManager.Instance is null.");
                 return null;
             }
 
@@ -119,7 +119,7 @@ namespace TowerDefense.Enemies
             Enemy enemy = EnemyPoolManager.Instance.GetEnemy(enemyData, spawnPosition, spawnRotation);
             if (enemy == null)
             {
-                Debug.LogError($"Failed to get enemy from pool for type '{enemyData.EnemyName}'.");
+                UnityEngine.Debug.LogError($"Failed to get enemy from pool for type '{enemyData.EnemyName}'.");
                 return null;
             }
 
@@ -134,14 +134,14 @@ namespace TowerDefense.Enemies
             }
             else
             {
-                Debug.LogWarning("ExitPoint.Instance is null. Enemy will not move to destination.");
+                UnityEngine.Debug.LogWarning("ExitPoint.Instance is null. Enemy will not move to destination.");
             }
 
             _activeEnemyCount++;
 
             if (_logSpawnEvents)
             {
-                Debug.Log($"Spawned enemy '{enemyData.EnemyName}' at {spawnPosition}. Active count: {_activeEnemyCount}");
+                UnityEngine.Debug.Log($"Spawned enemy '{enemyData.EnemyName}' at {spawnPosition}. Active count: {_activeEnemyCount}");
             }
 
             OnEnemySpawned?.Invoke(enemy);
@@ -184,7 +184,7 @@ namespace TowerDefense.Enemies
 
                 if (_logSpawnEvents)
                 {
-                    Debug.Log($"Enemy '{enemy.Data.EnemyName}' killed. Awarded {enemy.Data.KillReward} currency.");
+                    UnityEngine.Debug.Log($"Enemy '{enemy.Data.EnemyName}' killed. Awarded {enemy.Data.KillReward} currency.");
                 }
             }
 
@@ -224,7 +224,7 @@ namespace TowerDefense.Enemies
 
                 if (_logSpawnEvents)
                 {
-                    Debug.Log($"Enemy '{enemy.Data.EnemyName}' reached exit. Lost {enemy.Data.Damage} lives.");
+                    UnityEngine.Debug.Log($"Enemy '{enemy.Data.EnemyName}' reached exit. Lost {enemy.Data.Damage} lives.");
                 }
             }
 
@@ -240,7 +240,7 @@ namespace TowerDefense.Enemies
 
             if (_logSpawnEvents)
             {
-                Debug.Log($"Enemy returned to pool. Active count: {_activeEnemyCount}");
+                UnityEngine.Debug.Log($"Enemy returned to pool. Active count: {_activeEnemyCount}");
             }
 
             // Return enemy to pool
@@ -257,7 +257,7 @@ namespace TowerDefense.Enemies
 
                 if (_logSpawnEvents)
                 {
-                    Debug.Log("All enemies defeated!");
+                    UnityEngine.Debug.Log("All enemies defeated!");
                 }
             }
         }
