@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 using TowerDefense.Core;
+using TowerDefense.UI;
 
 namespace TowerDefense.Enemies
 {
@@ -27,6 +28,7 @@ namespace TowerDefense.Enemies
         public EnemyData Data => _enemyData;
         public float CurrentHealthFloat => _currentHealth;
         public float MaxHealth => _enemyData != null ? _enemyData.MaxHealth : 0f;
+        public float Armor => _enemyData != null ? _enemyData.Armor : 0f;
         public float HealthPercent => MaxHealth > 0 ? _currentHealth / MaxHealth : 0f;
         public bool IsDead => _isDead;
         public bool HasReachedEnd => _hasReachedEnd;
@@ -88,6 +90,13 @@ namespace TowerDefense.Enemies
 
         public event System.Action<Enemy> OnDeath;
         public event System.Action<Enemy> OnReachedEnd;
+        /// <summary>
+        /// Event fired when enemy takes damage. Parameters: Enemy, damage amount, isCritical.
+        /// </summary>
+        public event System.Action<Enemy, float, bool> OnDamageTakenWithCrit;
+        /// <summary>
+        /// Legacy event for backwards compatibility. Parameters: Enemy, damage amount.
+        /// </summary>
         public event System.Action<Enemy, float> OnDamageTaken;
 
         private void Awake()
@@ -157,6 +166,7 @@ namespace TowerDefense.Enemies
             OnDeath = null;
             OnReachedEnd = null;
             OnDamageTaken = null;
+            OnDamageTakenWithCrit = null;
 
             // Reset NavMeshAgent state
             if (_navMeshAgent != null)
@@ -172,12 +182,30 @@ namespace TowerDefense.Enemies
             }
         }
 
-        public void TakeDamage(float damage)
+        /// <summary>
+        /// Takes damage using the new DamageInfo system.
+        /// Applies armor reduction based on damage type.
+        /// </summary>
+        /// <param name="damageInfo">The damage information including amount, type, and critical status.</param>
+        public void TakeDamage(DamageInfo damageInfo)
         {
             if (_isDead || _hasReachedEnd) return;
 
-            _currentHealth -= damage;
-            OnDamageTaken?.Invoke(this, damage);
+            // Apply armor reduction based on damage type
+            float finalDamage = DamageCalculator.ApplyArmorReduction(damageInfo.Amount, Armor, damageInfo.Type);
+
+            _currentHealth -= finalDamage;
+
+            // Fire both events for compatibility
+            OnDamageTakenWithCrit?.Invoke(this, finalDamage, damageInfo.IsCritical);
+            OnDamageTaken?.Invoke(this, finalDamage);
+
+            // Spawn floating damage number
+            Vector3 hitPosition = damageInfo.HitPoint != Vector3.zero ? damageInfo.HitPoint : transform.position;
+            if (DamageNumberSpawner.Instance != null)
+            {
+                DamageNumberSpawner.Instance.SpawnDamageNumber(hitPosition, finalDamage, damageInfo.IsCritical);
+            }
 
             // Update health bar
             if (_healthBar != null)
@@ -190,6 +218,20 @@ namespace TowerDefense.Enemies
                 _currentHealth = 0f;
                 Die();
             }
+        }
+
+        /// <summary>
+        /// Takes raw damage without armor calculation.
+        /// Maintained for backwards compatibility. Delegates to TakeDamage(DamageInfo).
+        /// </summary>
+        /// <param name="damage">The raw damage amount to apply.</param>
+        public void TakeDamage(float damage)
+        {
+            // Delegate to TakeDamage(DamageInfo) to avoid code duplication
+            // and ensure damage numbers spawn for legacy calls too.
+            // Note: Using True damage type to bypass armor since legacy callers
+            // expect raw damage to be applied directly.
+            TakeDamage(new DamageInfo(damage, null, transform.position, false, DamageType.True));
         }
 
         public void Die()
