@@ -28,7 +28,7 @@ namespace TowerDefense.Editor
 
             if (surfaces == null || surfaces.Length == 0)
             {
-                Debug.LogWarning("[NavMeshBaker] No NavMeshSurface components found in the scene. " +
+                UnityEngine.Debug.LogWarning("[NavMeshBaker] No NavMeshSurface components found in the scene. " +
                     "Please add a NavMeshSurface component to your Ground object.");
                 EditorUtility.DisplayDialog(
                     "NavMesh Baker",
@@ -41,13 +41,13 @@ namespace TowerDefense.Editor
             int bakedCount = 0;
             foreach (NavMeshSurface surface in surfaces)
             {
-                Debug.Log($"[NavMeshBaker] Baking NavMesh for: {surface.gameObject.name}");
+                UnityEngine.Debug.Log($"[NavMeshBaker] Baking NavMesh for: {surface.gameObject.name}");
                 surface.BuildNavMesh();
                 bakedCount++;
                 EditorUtility.SetDirty(surface);
             }
 
-            Debug.Log($"[NavMeshBaker] Successfully baked {bakedCount} NavMesh surface(s).");
+            UnityEngine.Debug.Log($"[NavMeshBaker] Successfully baked {bakedCount} NavMesh surface(s).");
             EditorUtility.DisplayDialog(
                 "NavMesh Baker",
                 $"Successfully baked {bakedCount} NavMesh surface(s).",
@@ -64,7 +64,7 @@ namespace TowerDefense.Editor
 
             if (surfaces == null || surfaces.Length == 0)
             {
-                Debug.LogWarning("[NavMeshBaker] No NavMeshSurface components found in the scene.");
+                UnityEngine.Debug.LogWarning("[NavMeshBaker] No NavMeshSurface components found in the scene.");
                 EditorUtility.DisplayDialog(
                     "NavMesh Baker",
                     "No NavMeshSurface components found in the scene.",
@@ -75,13 +75,13 @@ namespace TowerDefense.Editor
             int clearedCount = 0;
             foreach (NavMeshSurface surface in surfaces)
             {
-                Debug.Log($"[NavMeshBaker] Clearing NavMesh for: {surface.gameObject.name}");
+                UnityEngine.Debug.Log($"[NavMeshBaker] Clearing NavMesh for: {surface.gameObject.name}");
                 surface.RemoveData();
                 clearedCount++;
                 EditorUtility.SetDirty(surface);
             }
 
-            Debug.Log($"[NavMeshBaker] Successfully cleared {clearedCount} NavMesh surface(s).");
+            UnityEngine.Debug.Log($"[NavMeshBaker] Successfully cleared {clearedCount} NavMesh surface(s).");
             EditorUtility.DisplayDialog(
                 "NavMesh Baker",
                 $"Successfully cleared {clearedCount} NavMesh surface(s).",
@@ -153,12 +153,12 @@ namespace TowerDefense.Editor
             if (hasIssues)
             {
                 report += "\n--- Setup incomplete. Please address the warnings above. ---";
-                Debug.LogWarning("[NavMeshBaker] " + report);
+                UnityEngine.Debug.LogWarning("[NavMeshBaker] " + report);
             }
             else
             {
                 report += "\n--- All checks passed! ---";
-                Debug.Log("[NavMeshBaker] " + report);
+                UnityEngine.Debug.Log("[NavMeshBaker] " + report);
             }
 
             EditorUtility.DisplayDialog("NavMesh Setup Validation", report, "OK");
