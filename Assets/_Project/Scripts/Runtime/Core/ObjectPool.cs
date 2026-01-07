@@ -119,13 +119,13 @@ namespace TowerDefense.Core
         {
             if (instance == null)
             {
-                Debug.LogWarning("ObjectPool.Return called with null instance.");
+                UnityEngine.Debug.LogWarning("ObjectPool.Return called with null instance.");
                 return;
             }
 
             if (!_active.Remove(instance))
             {
-                Debug.LogWarning($"ObjectPool.Return: Instance {instance.name} was not tracked as active.");
+                UnityEngine.Debug.LogWarning($"ObjectPool.Return: Instance {instance.name} was not tracked as active.");
             }
 
             _onReturn?.Invoke(instance);

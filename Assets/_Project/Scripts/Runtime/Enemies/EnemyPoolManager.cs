@@ -38,7 +38,7 @@ namespace TowerDefense.Enemies
         {
             if (Instance != null && Instance != this)
             {
-                Debug.LogWarning($"Multiple EnemyPoolManager instances detected. Destroying duplicate on {gameObject.name}.");
+                UnityEngine.Debug.LogWarning($"Multiple EnemyPoolManager instances detected. Destroying duplicate on {gameObject.name}.");
                 Destroy(gameObject);
                 return;
             }
@@ -77,13 +77,13 @@ namespace TowerDefense.Enemies
         {
             if (enemyData == null)
             {
-                Debug.LogError("EnemyPoolManager.GetEnemy called with null EnemyData.");
+                UnityEngine.Debug.LogError("EnemyPoolManager.GetEnemy called with null EnemyData.");
                 return null;
             }
 
             if (enemyData.Prefab == null)
             {
-                Debug.LogError($"EnemyData '{enemyData.EnemyName}' has no prefab assigned.");
+                UnityEngine.Debug.LogError($"EnemyData '{enemyData.EnemyName}' has no prefab assigned.");
                 return null;
             }
 
@@ -125,7 +125,7 @@ namespace TowerDefense.Enemies
         {
             if (enemy == null)
             {
-                Debug.LogWarning("EnemyPoolManager.ReturnEnemy called with null enemy.");
+                UnityEngine.Debug.LogWarning("EnemyPoolManager.ReturnEnemy called with null enemy.");
                 return;
             }
 
@@ -133,7 +133,7 @@ namespace TowerDefense.Enemies
             EnemyData data = enemy.Data;
             if (data == null)
             {
-                Debug.LogWarning($"Enemy '{enemy.name}' has no data, cannot determine pool. Destroying instead.");
+                UnityEngine.Debug.LogWarning($"Enemy '{enemy.name}' has no data, cannot determine pool. Destroying instead.");
                 Destroy(enemy.gameObject);
                 return;
             }
@@ -145,7 +145,7 @@ namespace TowerDefense.Enemies
             }
             else
             {
-                Debug.LogWarning($"No pool found for enemy type '{data.EnemyName}'. Destroying instead.");
+                UnityEngine.Debug.LogWarning($"No pool found for enemy type '{data.EnemyName}'. Destroying instead.");
                 Destroy(enemy.gameObject);
             }
         }
@@ -170,7 +170,7 @@ namespace TowerDefense.Enemies
         {
             if (enemyData == null || enemyData.Prefab == null)
             {
-                Debug.LogWarning("Cannot prewarm pool with null enemy data or prefab.");
+                UnityEngine.Debug.LogWarning("Cannot prewarm pool with null enemy data or prefab.");
                 return;
             }
 
@@ -189,7 +189,7 @@ namespace TowerDefense.Enemies
             Enemy prefabEnemy = enemyData.Prefab.GetComponent<Enemy>();
             if (prefabEnemy == null)
             {
-                Debug.LogError($"Prefab for '{enemyData.EnemyName}' does not have an Enemy component.");
+                UnityEngine.Debug.LogError($"Prefab for '{enemyData.EnemyName}' does not have an Enemy component.");
                 return null;
             }
 

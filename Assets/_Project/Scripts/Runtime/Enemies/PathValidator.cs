@@ -80,7 +80,7 @@ namespace TowerDefense.Enemies
             {
                 if (_logPathStatus)
                 {
-                    Debug.LogWarning("[PathValidator] Cannot validate path: SpawnPoint or ExitPoint not found.");
+                    UnityEngine.Debug.LogWarning("[PathValidator] Cannot validate path: SpawnPoint or ExitPoint not found.");
                 }
                 return false;
             }
@@ -91,7 +91,7 @@ namespace TowerDefense.Enemies
             {
                 if (_logPathStatus)
                 {
-                    Debug.LogWarning("[PathValidator] NavMesh.CalculatePath failed. Is the NavMesh baked?");
+                    UnityEngine.Debug.LogWarning("[PathValidator] NavMesh.CalculatePath failed. Is the NavMesh baked?");
                 }
                 return false;
             }
@@ -102,11 +102,11 @@ namespace TowerDefense.Enemies
             {
                 if (isComplete)
                 {
-                    Debug.Log($"[PathValidator] Valid path found with {path.corners.Length} waypoints.");
+                    UnityEngine.Debug.Log($"[PathValidator] Valid path found with {path.corners.Length} waypoints.");
                 }
                 else
                 {
-                    Debug.LogWarning($"[PathValidator] Path is incomplete. Status: {path.status}");
+                    UnityEngine.Debug.LogWarning($"[PathValidator] Path is incomplete. Status: {path.status}");
                 }
             }
 

@@ -137,7 +137,7 @@ namespace TowerDefense.Towers
         {
             if (ProjectilePoolManager.Instance == null)
             {
-                Debug.LogWarning($"[TowerAttack] No ProjectilePoolManager instance found. Falling back to direct damage.");
+                UnityEngine.Debug.LogWarning($"[TowerAttack] No ProjectilePoolManager instance found. Falling back to direct damage.");
                 ApplyDirectDamage(target);
                 return;
             }
@@ -155,7 +155,7 @@ namespace TowerDefense.Towers
 
             if (projectile == null)
             {
-                Debug.LogWarning($"[TowerAttack] Failed to get projectile from pool. Falling back to direct damage.");
+                UnityEngine.Debug.LogWarning($"[TowerAttack] Failed to get projectile from pool. Falling back to direct damage.");
                 ApplyDirectDamage(target);
                 return;
             }
