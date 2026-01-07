@@ -20,7 +20,7 @@ namespace TowerDefense.UI
         [Header("References")]
         [SerializeField] private TextMeshPro _textMesh;
 
-        private Camera _mainCamera;
+        private UnityEngine.Camera _mainCamera;
         private Color _originalColor;
         private float _elapsedTime;
         private bool _isInitialized;
@@ -40,7 +40,7 @@ namespace TowerDefense.UI
 
         private void Start()
         {
-            _mainCamera = Camera.main;
+            _mainCamera = UnityEngine.Camera.main;
         }
 
         private void Update()
@@ -85,7 +85,7 @@ namespace TowerDefense.UI
         {
             if (_mainCamera == null)
             {
-                _mainCamera = Camera.main;
+                _mainCamera = UnityEngine.Camera.main;
                 if (_mainCamera == null) return;
             }
 

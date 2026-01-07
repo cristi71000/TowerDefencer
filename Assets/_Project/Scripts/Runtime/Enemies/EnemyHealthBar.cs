@@ -138,9 +138,9 @@ namespace TowerDefense.Enemies
         {
             if (_cameraCacheFailed) return;
 
-            if (Camera.main != null)
+            if (UnityEngine.Camera.main != null)
             {
-                _cameraTransform = Camera.main.transform;
+                _cameraTransform = UnityEngine.Camera.main.transform;
             }
             else
             {
