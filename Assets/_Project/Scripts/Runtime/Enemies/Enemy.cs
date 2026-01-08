@@ -253,9 +253,10 @@ namespace TowerDefense.Enemies
         /// <summary>
         /// Applies a slow effect to the enemy, reducing movement speed.
         /// Only applies if the new slow is stronger than the current slow.
+        /// Note: Duration tracking is handled by StatusEffectManager, not this method.
         /// </summary>
         /// <param name="slowAmount">The slow amount (0-1 range). 0 = no slow, 1 = stopped.</param>
-        /// <param name="duration">The duration of the slow effect (used by StatusEffectManager).</param>
+        /// <param name="duration">Unused - kept for API consistency with StatusEffect.Apply().</param>
         public void ApplySlow(float slowAmount, float duration)
         {
             if (_navMeshAgent == null) return;
