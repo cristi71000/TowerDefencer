@@ -18,12 +18,15 @@ namespace TowerDefense.Enemies
         [SerializeField] private Transform _targetPoint;
 
         private NavMeshAgent _navMeshAgent;
+        private StatusEffectManager _statusEffectManager;
         private EnemyHealthBar _healthBar;
         private float _currentHealth;
         private bool _isDead;
         private bool _hasReachedEnd;
         private float _distanceTraveled;
         private Vector3 _lastPosition;
+        private float _originalSpeed;
+        private float _currentSlowAmount;
 
         public EnemyData Data => _enemyData;
         public float CurrentHealthFloat => _currentHealth;
@@ -102,6 +105,8 @@ namespace TowerDefense.Enemies
         private void Awake()
         {
             _navMeshAgent = GetComponent<NavMeshAgent>();
+            _statusEffectManager = GetComponent<StatusEffectManager>();
+            // Note: _originalSpeed is set in Initialize() from EnemyData, not cached here
         }
 
         private void Start()
@@ -139,6 +144,8 @@ namespace TowerDefense.Enemies
             if (_navMeshAgent != null)
             {
                 _navMeshAgent.speed = data.MoveSpeed;
+                _originalSpeed = data.MoveSpeed;
+                _currentSlowAmount = 0f;
                 _navMeshAgent.enabled = !data.IsFlying;
             }
 
@@ -156,11 +163,15 @@ namespace TowerDefense.Enemies
         /// </summary>
         public void ResetEnemy()
         {
+            // Reset status effects first to prevent pool corruption
+            _statusEffectManager?.ResetManager();
+
             _currentHealth = 0f;
             _isDead = false;
             _hasReachedEnd = false;
             _enemyData = null;
             _distanceTraveled = 0f;
+            _currentSlowAmount = 0f;
 
             // Clear event subscribers to prevent stale references
             OnDeath = null;
@@ -171,6 +182,7 @@ namespace TowerDefense.Enemies
             // Reset NavMeshAgent state
             if (_navMeshAgent != null)
             {
+                _navMeshAgent.speed = _originalSpeed;
                 _navMeshAgent.enabled = false;
                 _navMeshAgent.isStopped = false;
             }
@@ -232,6 +244,36 @@ namespace TowerDefense.Enemies
             // Note: Using True damage type to bypass armor since legacy callers
             // expect raw damage to be applied directly.
             TakeDamage(new DamageInfo(damage, null, transform.position, false, DamageType.True));
+        }
+
+        /// <summary>
+        /// Applies a slow effect to the enemy, reducing movement speed.
+        /// Only applies if the new slow is stronger than the current slow.
+        /// Note: Duration tracking is handled by StatusEffectManager, not this method.
+        /// </summary>
+        /// <param name="slowAmount">The slow amount (0-1 range). 0 = no slow, 1 = stopped.</param>
+        /// <param name="duration">The desired slow duration; consumed by StatusEffectManager to expire the effect, not used directly in this method.</param>
+        public void ApplySlow(float slowAmount, float duration)
+        {
+            if (_navMeshAgent == null) return;
+
+            slowAmount = Mathf.Clamp01(slowAmount);
+            if (slowAmount > _currentSlowAmount)
+            {
+                _currentSlowAmount = slowAmount;
+                _navMeshAgent.speed = _originalSpeed * (1f - _currentSlowAmount);
+            }
+        }
+
+        /// <summary>
+        /// Removes the slow effect, restoring the enemy's original movement speed.
+        /// </summary>
+        public void RemoveSlow()
+        {
+            if (_navMeshAgent == null) return;
+
+            _currentSlowAmount = 0f;
+            _navMeshAgent.speed = _originalSpeed;
         }
 
         public void Die()

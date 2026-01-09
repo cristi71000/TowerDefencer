@@ -40,6 +40,8 @@ namespace TowerDefense.Towers
         private bool _isActive;
         private Rigidbody _rigidbody;
         private GameObject _prefabSource;
+        private float _slowAmount;
+        private float _slowDuration;
 
         /// <summary>
         /// Event fired when the projectile hits a target.
@@ -135,6 +137,23 @@ namespace TowerDefense.Towers
             _lifetime = lifetime > 0f ? lifetime : _defaultLifetime;
         }
 
+        /// <summary>
+        /// Initializes the projectile with status effect parameters.
+        /// </summary>
+        /// <param name="target">The target transform to track</param>
+        /// <param name="damage">Damage to deal on hit</param>
+        /// <param name="speed">Movement speed</param>
+        /// <param name="aoeRadius">AOE radius (0 for single target)</param>
+        /// <param name="lifetime">Maximum time before expiration</param>
+        /// <param name="slowAmount">Slow effect amount (0-1, 0 = none)</param>
+        /// <param name="slowDuration">Slow effect duration in seconds</param>
+        public void Initialize(Transform target, int damage, float speed, float aoeRadius, float lifetime, float slowAmount, float slowDuration)
+        {
+            Initialize(target, damage, speed, aoeRadius, lifetime);
+            _slowAmount = Mathf.Clamp01(slowAmount);
+            _slowDuration = slowDuration;
+        }
+
         private void Update()
         {
             if (!_isActive) return;
@@ -225,6 +244,7 @@ namespace TowerDefense.Towers
         private void ApplySingleTargetDamage(Enemy enemy)
         {
             enemy.TakeDamage(_damage);
+            ApplyStatusEffects(enemy);
         }
 
         private void ApplyAOEDamage()
@@ -243,6 +263,24 @@ namespace TowerDefense.Towers
                 if (enemy != null && !enemy.IsDead)
                 {
                     enemy.TakeDamage(_damage);
+                    ApplyStatusEffects(enemy);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Applies status effects (like slow) to the hit enemy.
+        /// </summary>
+        /// <param name="enemy">The enemy to apply status effects to.</param>
+        private void ApplyStatusEffects(Enemy enemy)
+        {
+            if (_slowAmount > 0f && _slowDuration > 0f)
+            {
+                var statusManager = enemy.GetComponent<StatusEffectManager>();
+                if (statusManager != null)
+                {
+                    var slowEffect = new SlowEffect(_slowAmount, _slowDuration, gameObject);
+                    statusManager.AddEffect(slowEffect);
                 }
             }
         }
@@ -295,6 +333,8 @@ namespace TowerDefense.Towers
             _lifetime = _defaultLifetime;
             _timer = 0f;
             _isActive = false;
+            _slowAmount = 0f;
+            _slowDuration = 0f;
 
             // Clear event subscribers to prevent stale references
             OnHit = null;
