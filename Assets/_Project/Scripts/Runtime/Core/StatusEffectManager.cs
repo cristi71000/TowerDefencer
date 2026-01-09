@@ -242,10 +242,15 @@ namespace TowerDefense.Core
 
         /// <summary>
         /// Resets the manager for object pool reuse.
+        /// Clears all effects and event subscribers to prevent stale references.
         /// </summary>
         public void ResetManager()
         {
             ClearAllEffects();
+
+            // Clear event subscribers to avoid stale references when using object pooling
+            OnEffectAdded = null;
+            OnEffectRemoved = null;
         }
 
         /// <summary>

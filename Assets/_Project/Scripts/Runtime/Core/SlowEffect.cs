@@ -78,7 +78,7 @@ namespace TowerDefense.Core
         /// <param name="newDuration">The new duration.</param>
         public void UpdateSlowParameters(float newSlowAmount, float newDuration)
         {
-            // Only update if the new slow is stronger or equal
+            // Only update and refresh if the new slow is stronger or equal
             if (newSlowAmount >= SlowAmount)
             {
                 SlowAmount = newSlowAmount;
@@ -87,8 +87,9 @@ namespace TowerDefense.Core
                 {
                     _targetEnemy.ApplySlow(SlowAmount, newDuration);
                 }
+                Refresh(newDuration);
             }
-            Refresh(newDuration);
+            // Weaker slows do not refresh duration - enemy keeps stronger slow for remaining time
         }
     }
 }

@@ -106,11 +106,7 @@ namespace TowerDefense.Enemies
         {
             _navMeshAgent = GetComponent<NavMeshAgent>();
             _statusEffectManager = GetComponent<StatusEffectManager>();
-            // Cache original speed for slow effect restoration
-            if (_navMeshAgent != null)
-            {
-                _originalSpeed = _navMeshAgent.speed;
-            }
+            // Note: _originalSpeed is set in Initialize() from EnemyData, not cached here
         }
 
         private void Start()
@@ -256,7 +252,7 @@ namespace TowerDefense.Enemies
         /// Note: Duration tracking is handled by StatusEffectManager, not this method.
         /// </summary>
         /// <param name="slowAmount">The slow amount (0-1 range). 0 = no slow, 1 = stopped.</param>
-        /// <param name="duration">Unused - kept for API consistency with StatusEffect.Apply().</param>
+        /// <param name="duration">The desired slow duration; consumed by StatusEffectManager to expire the effect, not used directly in this method.</param>
         public void ApplySlow(float slowAmount, float duration)
         {
             if (_navMeshAgent == null) return;
