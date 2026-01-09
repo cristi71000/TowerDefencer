@@ -80,9 +80,17 @@ namespace TowerDefense.Debug
                     _maxFPS = _currentFPS;
                 }
 
-                // Update rolling average (simple approximation)
-                _avgFPS = (_avgFPS + _currentFPS) / 2f;
-                if (_avgFPS <= 0) _avgFPS = _currentFPS;
+                // Update rolling average using exponential moving average
+                if (_avgFPS <= 0f)
+                {
+                    // Initialize average on first valid reading
+                    _avgFPS = _currentFPS;
+                }
+                else
+                {
+                    const float smoothing = 0.1f; // 10% new value, 90% history
+                    _avgFPS = _avgFPS * (1f - smoothing) + _currentFPS * smoothing;
+                }
 
                 // Check for performance warning
                 bool wasInWarningState = _isInWarningState;
