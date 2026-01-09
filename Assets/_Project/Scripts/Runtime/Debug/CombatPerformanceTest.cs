@@ -80,7 +80,10 @@ namespace TowerDefense.Debug
                     _maxFPS = _currentFPS;
                 }
 
-                // Update rolling average using exponential moving average
+                // Update rolling average using exponential moving average (EMA)
+                // EMA provides smooth averaging where recent values have more weight than older ones.
+                // Formula: EMA = previous_EMA * (1 - α) + current_value * α
+                // With α = 0.1, we get ~10-frame effective smoothing window at 60 FPS (~166ms)
                 if (_avgFPS <= 0f)
                 {
                     // Initialize average on first valid reading
@@ -88,8 +91,10 @@ namespace TowerDefense.Debug
                 }
                 else
                 {
-                    const float smoothing = 0.1f; // 10% new value, 90% history
-                    _avgFPS = _avgFPS * (1f - smoothing) + _currentFPS * smoothing;
+                    // EMA smoothing factor: 0.1 = 10% new sample, 90% historical average
+                    // This provides good responsiveness while filtering out frame-to-frame jitter
+                    const float emaSmoothingFactor = 0.1f;
+                    _avgFPS = _avgFPS * (1f - emaSmoothingFactor) + _currentFPS * emaSmoothingFactor;
                 }
 
                 // Check for performance warning

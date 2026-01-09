@@ -33,6 +33,7 @@ namespace TowerDefense.Debug
         private bool _isSpawningWave;
         private int _enemiesSpawnedThisWave;
         private float _nextSpawnTime;
+        private GUIStyle _headerStyle;
 
         private void Update()
         {
@@ -209,10 +210,12 @@ namespace TowerDefense.Debug
         {
             if (!_showDebugInfo) return;
 
+            EnsureStyles();
+
             GUILayout.BeginArea(new Rect(10, 10, 300, 200));
             GUILayout.BeginVertical("box");
 
-            GUILayout.Label("<b>Combat Debug Controls</b>");
+            GUILayout.Label("<b>Combat Debug Controls</b>", _headerStyle);
             GUILayout.Label($"[{_spawnEnemyKey}] Spawn Enemy");
             GUILayout.Label($"[{_spawnWaveKey}] Spawn Wave ({_waveSize} enemies)");
             GUILayout.Label($"[{_killAllKey}] Kill All Enemies");
@@ -232,6 +235,19 @@ namespace TowerDefense.Debug
 
             GUILayout.EndVertical();
             GUILayout.EndArea();
+        }
+
+        private void EnsureStyles()
+        {
+            if (_headerStyle == null)
+            {
+                _headerStyle = new GUIStyle(GUI.skin.label)
+                {
+                    richText = true,
+                    fontStyle = FontStyle.Bold,
+                    fontSize = 12
+                };
+            }
         }
     }
 }
