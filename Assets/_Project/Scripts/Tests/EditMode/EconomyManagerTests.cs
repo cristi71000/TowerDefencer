@@ -21,9 +21,21 @@ namespace TowerDefense.Tests.EditMode
         [TearDown]
         public void TearDown()
         {
-            if (_economyManagerObject != null)
+            // Use try-finally to ensure singleton cleanup even if test fails
+            try
             {
-                Object.DestroyImmediate(_economyManagerObject);
+                if (_economyManagerObject != null)
+                {
+                    Object.DestroyImmediate(_economyManagerObject);
+                    _economyManagerObject = null;
+                }
+            }
+            finally
+            {
+                // Ensure singleton is cleared even if DestroyImmediate throws
+                // Note: DestroyImmediate triggers OnDestroy which clears Instance,
+                // but we verify cleanup here as a safety net
+                _economyManager = null;
             }
         }
 

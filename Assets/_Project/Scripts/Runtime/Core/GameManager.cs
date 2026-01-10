@@ -62,6 +62,12 @@ namespace TowerDefense.Core
             TrySubscribeToEconomyManager();
         }
 
+        private void OnEnable()
+        {
+            // Re-subscribe after disable/enable cycle
+            TrySubscribeToEconomyManager();
+        }
+
         private void OnDisable()
         {
             UnsubscribeFromEconomyManager();
@@ -115,6 +121,9 @@ namespace TowerDefense.Core
             _fallbackCurrency = _startingCurrency;
             CurrentWave = 0;
             _previousState = GameState.Initializing;
+
+            // Ensure subscription to EconomyManager before initialization
+            TrySubscribeToEconomyManager();
 
             // Initialize EconomyManager if available
             if (EconomyManager.Instance != null)
@@ -170,7 +179,11 @@ namespace TowerDefense.Core
                 }
                 else if (delta < 0)
                 {
-                    EconomyManager.Instance.TrySpend(-delta);
+                    bool success = EconomyManager.Instance.TrySpend(-delta);
+                    if (!success)
+                    {
+                        UnityEngine.Debug.LogWarning($"[GameManager] ModifyCurrency: TrySpend failed for amount {-delta}. Insufficient funds.");
+                    }
                 }
                 // Note: OnCurrencyChanged is fired through HandleEconomyCurrencyChanged
             }
