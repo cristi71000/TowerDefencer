@@ -39,6 +39,7 @@ namespace TowerDefense.UI
         private Color _livesOriginalColor;
         private Coroutine _currencyAnimationCoroutine;
         private Coroutine _livesAnimationCoroutine;
+        private Coroutine _messageCoroutine;
         private int _lastKnownLives;
         private int _lastKnownCurrency;
 
@@ -71,7 +72,7 @@ namespace TowerDefense.UI
         {
             UnsubscribeFromEvents();
 
-            // Stop any running animation coroutines
+            // Stop any running coroutines
             if (_currencyAnimationCoroutine != null)
             {
                 StopCoroutine(_currencyAnimationCoroutine);
@@ -81,6 +82,11 @@ namespace TowerDefense.UI
             {
                 StopCoroutine(_livesAnimationCoroutine);
                 _livesAnimationCoroutine = null;
+            }
+            if (_messageCoroutine != null)
+            {
+                StopCoroutine(_messageCoroutine);
+                _messageCoroutine = null;
             }
 
             // Reset visual states
@@ -321,13 +327,27 @@ namespace TowerDefense.UI
 
         /// <summary>
         /// Displays a temporary message on the HUD.
+        /// Currently logs to console - can be extended to show UI popup.
         /// </summary>
         /// <param name="message">The message to display.</param>
-        /// <param name="duration">How long to show the message.</param>
+        /// <param name="duration">How long the message is active (used for future UI implementation).</param>
         public void ShowMessage(string message, float duration = 2f)
         {
-            // Log message for now - can be extended to show UI popup
+            // Stop any existing message coroutine
+            if (_messageCoroutine != null)
+            {
+                StopCoroutine(_messageCoroutine);
+            }
+            _messageCoroutine = StartCoroutine(ShowMessageCoroutine(message, duration));
+        }
+
+        private IEnumerator ShowMessageCoroutine(string message, float duration)
+        {
+            // Log message start - can be extended to show UI popup
             UnityEngine.Debug.Log($"[HUD Message] {message}");
+
+            // Wait for duration (placeholder for future show/hide UI element)
+            yield return new WaitForSecondsRealtime(duration);
         }
 
         /// <summary>
